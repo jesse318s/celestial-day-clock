@@ -72,14 +72,22 @@ void CelestialDayClock::setBodyMaximums(int h, int m) {
 	if (maxMinutes > 0) ++maxHours;
 }
 std::string CelestialDayClock::getBodyMaximums() const {
-	const int bodyMaxHours = maxHours % 2 == 1 && maxMinutes >= radix * secondaryRadix / 2 || maxMinutes == 0
-		? maxHours : maxHours - 1;
-	const int bodyMaxMinutes = bodyMaxHours % 2 == 1
-		? (maxMinutes - radix * secondaryRadix / 2) * 2 : maxMinutes * 2;
+	const bool trulyOddMaxHours = maxHours % 2 == 1 && maxMinutes >= radix * secondaryRadix / 2;
+	int bodyMaxHours = 0;
+	int bodyMaxMinutes = 0;
+
+	if (trulyOddMaxHours || maxMinutes == 0) 
+		bodyMaxHours = maxHours;
+	else 
+		bodyMaxHours = maxHours - 1;
+
+	if (bodyMaxHours % 2 == 1) 
+		bodyMaxMinutes = (maxMinutes - radix * secondaryRadix / 2) * 2;
+	else 
+		bodyMaxMinutes = maxMinutes * 2;
 
 	return std::to_string(bodyMaxHours) + delimiter
-		+ (bodyMaxMinutes < secondaryRadix
-			? "0" : "") + std::to_string(bodyMaxMinutes) + delimiter
+		+ (bodyMaxMinutes < secondaryRadix ? "0" : "") + std::to_string(bodyMaxMinutes) + delimiter
 		+ "00";
 }
 
@@ -134,8 +142,7 @@ bool CelestialDayClock::checkTimeReset() {
 	}
 
 	if (maxMinutes != 0 && areMinutesMax && areSecondsMax) {
-		hours = hours == maxHours / 2
-			? maxHours / 2 + 1 : 0;
+		hours = hours == maxHours / 2 ? maxHours / 2 + 1 : 0;
 		minutesDigit1 = 0;
 		minutesDigit2 = 0;
 		secondsDigit1 = 0;
