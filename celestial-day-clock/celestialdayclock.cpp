@@ -76,15 +76,11 @@ std::string CelestialDayClock::getBodyMaximums() const {
 	int bodyMaxHours = 0;
 	int bodyMaxMinutes = 0;
 
-	if (trulyOddMaxHours || maxMinutes == 0) 
-		bodyMaxHours = maxHours;
-	else 
-		bodyMaxHours = maxHours - 1;
+	if (trulyOddMaxHours || maxMinutes == 0) bodyMaxHours = maxHours;
+	else bodyMaxHours = maxHours - 1;
 
-	if (bodyMaxHours % 2 == 1) 
-		bodyMaxMinutes = (maxMinutes - radix * secondaryRadix / 2) * 2;
-	else 
-		bodyMaxMinutes = maxMinutes * 2;
+	if (bodyMaxHours % 2 == 1) bodyMaxMinutes = (maxMinutes - radix * secondaryRadix / 2) * 2;
+	else bodyMaxMinutes = maxMinutes * 2;
 
 	return std::to_string(bodyMaxHours) + delimiter
 		+ (bodyMaxMinutes < secondaryRadix ? "0" : "") + std::to_string(bodyMaxMinutes) + delimiter
