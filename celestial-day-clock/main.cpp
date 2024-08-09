@@ -27,6 +27,12 @@ namespace cdc_test {
 	const std::string pmIndicator = " PM";
 	const std::string ansiPreviousLineDeletion = "\033[A\033[2K";
 	const char delimiter = ':';
+	const std::string zeroTimeString = std::string(1, '0') + cdc_test::delimiter +
+		"00" + cdc_test::delimiter +
+		"00";
+	const std::string oneSecondTimeString = std::string(1, '0') + cdc_test::delimiter +
+		"00" + cdc_test::delimiter +
+		"01";
 	constexpr int decimalRadix = 10;
 	constexpr int senaryRadix = 6;
 	constexpr int hours = 24;
@@ -163,15 +169,9 @@ static void testMilitaryTime2(CelestialDayClock* clock) {
 		std::to_string(cdc_test::time2.secondsDigit1 * cdc_test::decimalRadix +
 			cdc_test::time2.secondsDigit2));
 	clock->tick();
-	assert(clock->getTimeMilitary() ==
-		std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00");
+	assert(clock->getTimeMilitary() == cdc_test::zeroTimeString);
 	clock->tick();
-	assert(clock->getTimeMilitary() ==
-		std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01");
+	assert(clock->getTimeMilitary() == cdc_test::oneSecondTimeString);
 	std::cout << "Test passed." << std::endl;
 }
 
@@ -234,15 +234,9 @@ static void testMilitaryTime5(CelestialDayClock* clock) {
 		std::to_string(cdc_test::time5.secondsDigit1 * cdc_test::decimalRadix +
 			cdc_test::time5.secondsDigit2));
 	clock->tick();
-	assert(clock->getTimeMilitary() ==
-		std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00");
+	assert(clock->getTimeMilitary() == cdc_test::zeroTimeString);
 	clock->tick();
-	assert(clock->getTimeMilitary() ==
-		std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01");
+	assert(clock->getTimeMilitary() == cdc_test::oneSecondTimeString);
 	std::cout << "Test passed." << std::endl;
 }
 
@@ -322,15 +316,9 @@ static void testStandardTime3(CelestialDayClock* clock) {
 		std::to_string(cdc_test::time3.secondsDigit1 * cdc_test::decimalRadix +
 			cdc_test::time3.secondsDigit2) + cdc_test::amIndicator);
 	clock->tick();
-	assert(clock->getTime() ==
-		std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00" + cdc_test::pmIndicator);
+	assert(clock->getTime() == cdc_test::zeroTimeString + cdc_test::pmIndicator);
 	clock->tick();
-	assert(clock->getTime() ==
-		std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01" + cdc_test::pmIndicator);
+	assert(clock->getTime() == cdc_test::oneSecondTimeString + cdc_test::pmIndicator);
 	std::cout << "Test passed." << std::endl;
 }
 
@@ -366,15 +354,9 @@ static void testStandardTime5(CelestialDayClock* clock) {
 		std::to_string(cdc_test::time5.secondsDigit1 * cdc_test::decimalRadix +
 			cdc_test::time5.secondsDigit2) + cdc_test::pmIndicator);
 	clock->tick();
-	assert(clock->getTime() ==
-		std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00" + cdc_test::amIndicator);
+	assert(clock->getTime() == cdc_test::zeroTimeString + cdc_test::amIndicator);
 	clock->tick();
-	assert(clock->getTime() ==
-		std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01" + cdc_test::amIndicator);
+	assert(clock->getTime() == cdc_test::oneSecondTimeString + cdc_test::amIndicator);
 	std::cout << "Test passed." << std::endl;
 }
 
@@ -394,14 +376,10 @@ static void testCDCStandardTime() {
 static void displayStandardCDC(const int h, const int m) {
 	std::unique_ptr<CelestialDayClock> clock = std::make_unique<CelestialDayClock>(h, m);
 
-	std::cout << "\n" + std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00" + cdc_test::amIndicator << std::endl;
+	std::cout << "\n" + cdc_test::zeroTimeString + cdc_test::amIndicator << std::endl;
 	clock->tick();
 
-	while (clock->getTime() != std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00" + cdc_test::amIndicator) {
+	while (clock->getTime() != cdc_test::zeroTimeString + cdc_test::amIndicator) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(999));
 		std::cout << cdc_test::ansiPreviousLineDeletion;
 		std::cout << clock->getTime() << std::endl;
