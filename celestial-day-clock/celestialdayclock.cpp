@@ -126,6 +126,7 @@ bool CelestialDayClock::checkTimeReset() {
 	const bool areMinutesMax = (hours == maxHours / 2 || hours >= maxHours) &&
 		minutesDigit1 * secondaryRadix + minutesDigit2 >= maxMinutes - 1;
 	const bool areSecondsMax = secondsDigit1 == radix - 1 && secondsDigit2 == secondaryRadix - 1;
+	bool isReset = false;
 
 	if (maxMinutes == 0 && areHoursMax && areSecondsMax) {
 		hours = 0;
@@ -134,7 +135,7 @@ bool CelestialDayClock::checkTimeReset() {
 		secondsDigit1 = 0;
 		secondsDigit2 = 0;
 
-		return true;
+		isReset = true;
 	}
 
 	if (maxMinutes != 0 && areMinutesMax && areSecondsMax) {
@@ -144,10 +145,10 @@ bool CelestialDayClock::checkTimeReset() {
 		secondsDigit1 = 0;
 		secondsDigit2 = 0;
 
-		return true;
+		isReset = true;
 	}
 
-	return false;
+	return isReset;
 }
 
 void CelestialDayClock::tick() {
