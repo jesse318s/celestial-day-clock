@@ -392,8 +392,10 @@ static void displayPlanetaryCDCMenu() {
 	const std::string range =
 		std::to_string(PlanetChoice::Mercury) + " and " + std::to_string(PlanetChoice::MaxChoice);
 	int choice = 0;
+	bool validChoice = false;
 
-	while (true) {
+	while (!validChoice) {
+		validChoice = true;
 		std::cout << "\n\nChoose a planet to display its standard celestial day clock: " << std::endl;
 
 		for (const std::pair<PlanetChoice, std::string>& planet : planetNames) {
@@ -402,12 +404,12 @@ static void displayPlanetaryCDCMenu() {
 
 		std::cin >> choice;
 
-		if (!std::cin.fail() && choice >= PlanetChoice::Mercury && choice <= PlanetChoice::MaxChoice)
-			break;
-
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Invalid choice. Please enter a number between " + range + "." << std::endl;
+		if (std::cin.fail() || choice < PlanetChoice::Mercury || choice > PlanetChoice::MaxChoice) {
+			validChoice = false;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid choice. Please enter a number between " + range + "." << std::endl;
+		}
 	}
 
 	const std::unordered_map<PlanetChoice, CelestialDay>::const_iterator itr =
