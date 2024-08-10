@@ -17,11 +17,23 @@ namespace cdc_test {
 		int secondsDigit2;
 	};
 
-	const ClockUnitValues time1 = { 11, 5, 9, 5, 9 };
-	const ClockUnitValues time2 = { 23, 5, 9, 5, 9 };
-	const ClockUnitValues time3 = { 12, 2, 7, 5, 9 };
-	const ClockUnitValues time4 = { 24, 5, 9, 5, 9 };
-	const ClockUnitValues time5 = { 25, 2, 7, 5, 9 };
+	constexpr int decimalRadix = 10;
+	constexpr int senaryRadix = 6;
+	const ClockUnitValues time1 = { 11,
+	  senaryRadix - 1, decimalRadix - 1,
+	  senaryRadix - 1, decimalRadix - 1 };
+	const ClockUnitValues time2 = { 23,
+	  senaryRadix - 1, decimalRadix - 1,
+	  senaryRadix - 1, decimalRadix - 1 };
+	const ClockUnitValues time3 = { 12,
+	  2, 7,
+	  senaryRadix - 1, decimalRadix - 1 };
+	const ClockUnitValues time4 = { 24,
+	  senaryRadix - 1, decimalRadix - 1,
+	  senaryRadix - 1, decimalRadix - 1 };
+	const ClockUnitValues time5 = { 25,
+	  2, 7,
+	  senaryRadix - 1, decimalRadix - 1 };
 	const std::string passed = "Test passed.";
 	const std::string nanString = "nan";
 	const std::string amIndicator = " AM";
@@ -34,8 +46,6 @@ namespace cdc_test {
 	const std::string oneSecondTimeString = std::string(1, '0') + cdc_test::delimiter +
 		"00" + cdc_test::delimiter +
 		"01";
-	constexpr int decimalRadix = 10;
-	constexpr int senaryRadix = 6;
 	constexpr int hours = 24;
 	constexpr int minutes = 58;
 	constexpr int expectedMinutes = 56;
@@ -135,7 +145,7 @@ static void setCDCTime(CelestialDayClock* clock, const cdc_test::ClockUnitValues
 }
 
 static void testMilitaryTime1(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours for the first half of the day..." << std::endl;
+	std::cout << "\nTesting max hours for first half of day..." << std::endl;
 	assert(clock->getBodyMaximums() ==
 		std::to_string(cdc_test::hours) + cdc_test::delimiter +
 		"00" + cdc_test::delimiter +
@@ -161,7 +171,7 @@ static void testMilitaryTime1(CelestialDayClock* clock) {
 }
 
 static void testMilitaryTime2(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours for the end of the day..." << std::endl;
+	std::cout << "\nTesting max hours for end of day..." << std::endl;
 	setCDCTime(clock, cdc_test::time2);
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time2.hours) + cdc_test::delimiter +
@@ -177,7 +187,7 @@ static void testMilitaryTime2(CelestialDayClock* clock) {
 }
 
 static void testMilitaryTime3(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours and max minutes for the first half of the day..." << std::endl;
+	std::cout << "\nTesting max hours and max minutes for first half of day..." << std::endl;
 	clock->setBodyMaximums(cdc_test::hours, cdc_test::minutes);
 	assert(clock->getBodyMaximums() ==
 		std::to_string(cdc_test::hours) + cdc_test::delimiter +
@@ -204,7 +214,7 @@ static void testMilitaryTime3(CelestialDayClock* clock) {
 }
 
 static void testMilitaryTime4(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours and max minutes for the last half of the day..." << std::endl;
+	std::cout << "\nTesting max hours and max minutes for last half of day..." << std::endl;
 	setCDCTime(clock, cdc_test::time4);
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time4.hours) + cdc_test::delimiter +
@@ -226,7 +236,7 @@ static void testMilitaryTime4(CelestialDayClock* clock) {
 }
 
 static void testMilitaryTime5(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours and max minutes for the end of the day..." << std::endl;
+	std::cout << "\nTesting max hours and max minutes for end of day..." << std::endl;
 	setCDCTime(clock, cdc_test::time5);
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time5.hours) + cdc_test::delimiter +
@@ -255,7 +265,7 @@ static void testCDCMilitaryTime() {
 }
 
 static void testStandardTime1(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours for the first half of the day..." << std::endl;
+	std::cout << "\nTesting max hours for first half of day..." << std::endl;
 	assert(clock->getBodyMaximums() ==
 		std::to_string(cdc_test::hours) + cdc_test::delimiter +
 		"00" + cdc_test::delimiter +
@@ -281,7 +291,7 @@ static void testStandardTime1(CelestialDayClock* clock) {
 }
 
 static void testStandardTime2(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours for the end of the day..." << std::endl;
+	std::cout << "\nTesting max hours for end of day..." << std::endl;
 	setCDCTime(clock, cdc_test::time2);
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time2.hours / 2) + cdc_test::delimiter +
@@ -303,7 +313,7 @@ static void testStandardTime2(CelestialDayClock* clock) {
 }
 
 static void testStandardTime3(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours and max minutes for the first half of the day..." << std::endl;
+	std::cout << "\nTesting max hours and max minutes for first half of day..." << std::endl;
 	clock->setBodyMaximums(cdc_test::hours, cdc_test::minutes);
 	assert(clock->getBodyMaximums() ==
 		std::to_string(cdc_test::hours) + cdc_test::delimiter +
@@ -324,7 +334,7 @@ static void testStandardTime3(CelestialDayClock* clock) {
 }
 
 static void testStandardTime4(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours and max minutes for the last half of the day..." << std::endl;
+	std::cout << "\nTesting max hours and max minutes for last half of day..." << std::endl;
 	setCDCTime(clock, cdc_test::time4);
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time4.hours / 2 - 1) + cdc_test::delimiter +
@@ -346,7 +356,7 @@ static void testStandardTime4(CelestialDayClock* clock) {
 }
 
 static void testStandardTime5(CelestialDayClock* clock) {
-	std::cout << "\nTesting max hours and max minutes for the end of the day..." << std::endl;
+	std::cout << "\nTesting max hours and max minutes for end of day..." << std::endl;
 	setCDCTime(clock, cdc_test::time5);
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time5.hours / 2) + cdc_test::delimiter +
@@ -396,7 +406,8 @@ static void displayPlanetaryCDCMenu() {
 
 	while (!validChoice) {
 		validChoice = true;
-		std::cout << "\n\nChoose a planet to display its standard celestial day clock: " << std::endl;
+		std::cout << "\n\nChoose a planet to display its standard celestial day clock: " <<
+			std::endl;
 
 		for (const std::pair<PlanetChoice, std::string>& planet : planetNames) {
 			std::cout << planet.first << ". " << planet.second << std::endl;
@@ -408,7 +419,8 @@ static void displayPlanetaryCDCMenu() {
 			validChoice = false;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Invalid choice. Please enter a number between " + range + "." << std::endl;
+			std::cout << "Invalid choice. Please enter a number between " + range + "." <<
+				std::endl;
 		}
 	}
 
