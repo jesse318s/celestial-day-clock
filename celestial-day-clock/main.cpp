@@ -33,8 +33,7 @@ namespace cdc_test {
 	constexpr int decimalRadix = 10;
 	constexpr int hours = 24;
 	constexpr int minutes = 58;
-	constexpr int expectedMinutesDigit1 = senaryRadix - 1;
-	constexpr int expectedMinutes = expectedMinutesDigit1 * decimalRadix + senaryRadix;
+	constexpr int expectedMinutes = (senaryRadix - 1) * decimalRadix + senaryRadix;
 	const ClockUnitValues time1 = { hours / 2 - 1,
 	 senaryRadix - 1, decimalRadix - 1,
 	 senaryRadix - 1, decimalRadix - 1 };
@@ -42,13 +41,13 @@ namespace cdc_test {
 	 senaryRadix - 1, decimalRadix - 1,
 	 senaryRadix - 1, decimalRadix - 1 };
 	const ClockUnitValues time3 = { hours / 2,
-	 expectedMinutesDigit1 / 2, senaryRadix + 1,
+	 (senaryRadix - 1) / 2, senaryRadix + 1,
 	 senaryRadix - 1, decimalRadix - 1 };
 	const ClockUnitValues time4 = { hours,
 	 senaryRadix - 1, decimalRadix - 1,
 	 senaryRadix - 1, decimalRadix - 1 };
 	const ClockUnitValues time5 = { hours + 1,
-	 expectedMinutesDigit1 / 2, senaryRadix + 1,
+	 (senaryRadix - 1) / 2, senaryRadix + 1,
 	 senaryRadix - 1, decimalRadix - 1 };
 }
 
