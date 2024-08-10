@@ -385,13 +385,16 @@ static void testCDCStandardTime() {
 }
 
 static void displayStandardCDC(const int h, const int m) {
-	std::unique_ptr<CelestialDayClock> clock = std::make_unique<CelestialDayClock>(h, m);
+	const std::unique_ptr<CelestialDayClock> clock = std::make_unique<CelestialDayClock>(h, m);
+	std::chrono::time_point<std::chrono::steady_clock> nextTick =
+		std::chrono::steady_clock::now() + std::chrono::seconds(1);
 
-	std::cout << "\n" + cdc_test::zeroTimeString + cdc_test::amIndicator << std::endl;
+	std::cout << '\n' + clock->getTime() << std::endl;
 	clock->tick();
 
-	while (clock->getTime() != cdc_test::zeroTimeString + cdc_test::amIndicator) {
-		std::this_thread::sleep_for(std::chrono::milliseconds(999));
+	while (true) {
+		std::this_thread::sleep_until(nextTick);
+		nextTick += std::chrono::seconds(1);
 		std::cout << cdc_test::ansiPreviousLineDeletion;
 		std::cout << clock->getTime() << std::endl;
 		clock->tick();
