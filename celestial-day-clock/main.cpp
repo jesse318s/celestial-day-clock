@@ -17,23 +17,6 @@ namespace cdc_test {
 		int secondsDigit2;
 	};
 
-	constexpr int decimalRadix = 10;
-	constexpr int senaryRadix = 6;
-	const ClockUnitValues time1 = { 11,
-	  senaryRadix - 1, decimalRadix - 1,
-	  senaryRadix - 1, decimalRadix - 1 };
-	const ClockUnitValues time2 = { 23,
-	  senaryRadix - 1, decimalRadix - 1,
-	  senaryRadix - 1, decimalRadix - 1 };
-	const ClockUnitValues time3 = { 12,
-	  2, 7,
-	  senaryRadix - 1, decimalRadix - 1 };
-	const ClockUnitValues time4 = { 24,
-	  senaryRadix - 1, decimalRadix - 1,
-	  senaryRadix - 1, decimalRadix - 1 };
-	const ClockUnitValues time5 = { 25,
-	  2, 7,
-	  senaryRadix - 1, decimalRadix - 1 };
 	const std::string passed = "Test passed.";
 	const std::string nanString = "nan";
 	const std::string amIndicator = " AM";
@@ -46,9 +29,27 @@ namespace cdc_test {
 	const std::string oneSecondTimeString = std::string(1, '0') + cdc_test::delimiter +
 		"00" + cdc_test::delimiter +
 		"01";
+	constexpr int senaryRadix = 6;
+	constexpr int decimalRadix = 10;
 	constexpr int hours = 24;
 	constexpr int minutes = 58;
-	constexpr int expectedMinutes = 56;
+	constexpr int expectedMinutesDigit1 = senaryRadix - 1;
+	constexpr int expectedMinutes = expectedMinutesDigit1 * decimalRadix + senaryRadix;
+	const ClockUnitValues time1 = { hours / 2 - 1,
+	 senaryRadix - 1, decimalRadix - 1,
+	 senaryRadix - 1, decimalRadix - 1 };
+	const ClockUnitValues time2 = { hours - 1,
+	 senaryRadix - 1, decimalRadix - 1,
+	 senaryRadix - 1, decimalRadix - 1 };
+	const ClockUnitValues time3 = { hours / 2,
+	 expectedMinutesDigit1 / 2, senaryRadix + 1,
+	 senaryRadix - 1, decimalRadix - 1 };
+	const ClockUnitValues time4 = { hours,
+	 senaryRadix - 1, decimalRadix - 1,
+	 senaryRadix - 1, decimalRadix - 1 };
+	const ClockUnitValues time5 = { hours + 1,
+	 expectedMinutesDigit1 / 2, senaryRadix + 1,
+	 senaryRadix - 1, decimalRadix - 1 };
 }
 
 enum PlanetChoice {
