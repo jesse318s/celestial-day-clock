@@ -1,6 +1,4 @@
 #include "celestialdayclock.h"
-#include "numeric_limits.h"
-#include <string>
 
 void CelestialDayClock::setHours(int h) {
 	if (h > maxHours) h = maxHours;
