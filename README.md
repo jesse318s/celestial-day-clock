@@ -1,6 +1,6 @@
 # celestial-day-clock
 
-This project defines a clock class that keeps track of time in a celestial day. It includes a simplified version of std::numeric_limits with additional functionality for an unspecified type and a time type (std::time_t). The clock class demonstrates the use of the new numeric limits of time functionality.
+This project defines a clock class that keeps track of time in a celestial day. It includes a simplified version of std::numeric_limits with additional functionality for an unspecified type and a time type (std::time_t). The clock class demonstrates the use of the new numeric limits of time functionality. This project was developed in Visual Studio 2022.
 
 ## About Representing Time
 
