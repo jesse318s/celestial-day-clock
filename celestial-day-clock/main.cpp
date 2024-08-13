@@ -1,12 +1,15 @@
 #include "numeric_limits.h"
 #include "celestialdayclock.h"
+#include "orrerytimepiece.h"
 #include <iostream>
-#include <string>
 #include <cassert>
-#include <unordered_map>
-#include <map>
-#include <thread>
+#include <string>
 #include <chrono>
+#include <utility>
+#include <map>
+#include <unordered_map>
+#include <thread>
+#include <cstdlib>
 
 namespace cdc_test {
 	struct ClockUnitValues {
@@ -95,7 +98,7 @@ static void testCDCMilitaryTime();
 
 static void testCDCStandardTime();
 
-static void displayPlanetaryCDCMenu();
+static void displayCDCMenu();
 
 int main() {
 	try {
@@ -105,7 +108,7 @@ int main() {
 		testCDCMilitaryTime();
 		testCDCStandardTime();
 		// Demonstrating the use of the celestialdayclock class
-		displayPlanetaryCDCMenu();
+		displayCDCMenu();
 	}
 	catch (const std::exception& e) {
 		std::cerr << std::string(1, '\n') + e.what() << std::endl;
@@ -409,8 +412,7 @@ static void displayPlanetaryCDCMenu() {
 
 	while (!validChoice) {
 		validChoice = true;
-		std::cout << "\n\nChoose a planet to display its standard celestial day clock: " <<
-			std::endl;
+		std::cout << "\n\nChoose a planet to display its standard clock: " << std::endl;
 
 		for (const std::pair<PlanetChoice, std::string>& planet : planetNames) {
 			std::cout << planet.first << ". " << planet.second << std::endl;
@@ -422,8 +424,7 @@ static void displayPlanetaryCDCMenu() {
 			validChoice = false;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Invalid choice. Please enter a number between " + range + "." <<
-				std::endl;
+			std::cout << "Invalid choice. Please enter a number between " + range << std::endl;
 		}
 	}
 
@@ -431,4 +432,79 @@ static void displayPlanetaryCDCMenu() {
 		planetDayLengths.find(static_cast<PlanetChoice>(choice));
 
 	if (itr != planetDayLengths.end()) displayStandardCDC(itr->second.hours, itr->second.minutes);
+}
+
+static std::unique_ptr<OrreryTimepiece> createSolarSystemTimepiece() {
+	std::unique_ptr<OrreryTimepiece> timepiece = std::make_unique<OrreryTimepiece>();
+	CelestialDayClock* clock = nullptr;
+
+	std::srand(static_cast<unsigned int>(std::time(0)));
+
+	for (const std::pair<PlanetChoice, CelestialDay>& planet : planetDayLengths) {
+		clock = new CelestialDayClock(planet.second.hours, planet.second.minutes);
+		clock->setHours(std::rand() % 2);
+		clock->setMinutesDigit1(std::rand() % cdc_test::senaryRadix);
+		clock->setMinutesDigit2(std::rand() % cdc_test::decimalRadix);
+		clock->setSecondsDigit1(std::rand() % cdc_test::senaryRadix);
+		clock->setSecondsDigit2(std::rand() % cdc_test::decimalRadix);
+		timepiece->add(planetNames.at(planet.first) + ':', clock);
+	}
+
+	return timepiece;
+}
+
+static void displayStandardOrreryTimepiece(std::unique_ptr<OrreryTimepiece> timepiece) {
+	std::chrono::time_point<std::chrono::steady_clock> nextTick =
+		std::chrono::steady_clock::now() + std::chrono::seconds(1);
+
+	std::cout << std::endl;
+
+	for (const std::string& time : timepiece->getAllTimes()) {
+		std::cout << time << std::endl;
+	}
+
+	timepiece->tick();
+
+	while (true) {
+		std::this_thread::sleep_until(nextTick);
+		nextTick += std::chrono::seconds(1);
+
+		for (int i = 0; i < timepiece->getSize(); ++i) {
+			std::cout << cdc_test::ansiPreviousLineDeletion;
+		}
+
+		for (const std::string& time : timepiece->getAllTimes()) {
+			std::cout << time << std::endl;
+		}
+
+		timepiece->tick();
+	}
+}
+
+static void displayCDCMenu() {
+	constexpr int planetChoice = 1;
+	constexpr int orreryChoice = planetChoice + 1;
+	const std::string range =
+		std::to_string(planetChoice) + " and " + std::to_string(orreryChoice);
+	int choice = 0;
+	bool validChoice = false;
+
+	while (!validChoice) {
+		validChoice = true;
+		std::cout << "\n\nChoose to display a planet clock or an orrery timepiece: " << std::endl;
+		std::cout << std::to_string(planetChoice) + ". Display a planet clock" << std::endl;
+		std::cout << std::to_string(orreryChoice) + ". Display an orrery timepiece" << std::endl;
+		std::cin >> choice;
+
+		if (std::cin.fail() || choice < planetChoice || choice > orreryChoice) {
+			validChoice = false;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid choice. Please enter a number between " + range << std::endl;
+		}
+	}
+
+	if (choice == 1) displayPlanetaryCDCMenu();
+
+	if (choice == 2) displayStandardOrreryTimepiece(createSolarSystemTimepiece());
 }

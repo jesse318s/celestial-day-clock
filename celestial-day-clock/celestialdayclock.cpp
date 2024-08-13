@@ -46,7 +46,7 @@ void CelestialDayClock::setSecondsDigit2(int s) {
 int CelestialDayClock::getSecondsDigit2() const { return secondsDigit2; }
 
 void CelestialDayClock::setBodyMaximums(int h, int m) {
-	constexpr int halfMaxBodyMinutes = 
+	constexpr int halfMaxBodyMinutes =
 		((radix - 1) / 2 * secondaryRadix + (secondaryRadix - 1)) - 1;
 
 	if (h < maxHoursMin) h = maxHoursMin;
@@ -105,8 +105,8 @@ int CelestialDayClock::getStandardHours() const {
 }
 
 std::string CelestialDayClock::getMeridiemIndicator() const {
-	if (maxMinutes == 0 && hours >= maxHours / 2 && hours != maxHours) return
-	{ ' ', postChar, meridiemChar };
+	if (maxMinutes == 0 && hours >= maxHours / 2 && hours != maxHours)
+		return { ' ', postChar, meridiemChar };
 
 	if (maxMinutes != 0 && hours > maxHours / 2) return { ' ', postChar, meridiemChar };
 

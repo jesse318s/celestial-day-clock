@@ -21,12 +21,18 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="orrerytimepiece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="celestialdayclock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="numeric_limits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orrerytimepiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

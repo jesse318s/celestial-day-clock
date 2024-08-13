@@ -129,10 +129,12 @@
   <ItemGroup>
     <ClCompile Include="celestialdayclock.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="orrerytimepiece.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="celestialdayclock.h" />
     <ClInclude Include="numeric_limits.h" />
+    <ClInclude Include="orrerytimepiece.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
