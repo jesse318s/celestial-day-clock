@@ -14,6 +14,7 @@ The OrreryTimepiece class manages multiple CelestialDayClock instances. It allow
 *	Retrieve all times in military format.
 *	Retrieve all times in standard format.
 *	Tick all clocks forward.
+
 The OrreryTimepiece class uses a vector of pairs to store the label and corresponding CelestialDayClock pointers.
 
 ## About Representing Time
