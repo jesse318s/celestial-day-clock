@@ -9,11 +9,11 @@ The CelestialDayClock class is a generic clock that keeps track of a celestial b
 ## OrreryTimepiece Class
 
 The OrreryTimepiece class manages multiple CelestialDayClock instances. It allows you to:
-•	Add a new clock with a label.
-•	Clear all clocks.
-•	Retrieve all times in military format.
-•	Retrieve all times in standard format.
-•	Tick all clocks forward.
+*	Add a new clock with a label.
+*	Clear all clocks.
+*	Retrieve all times in military format.
+*	Retrieve all times in standard format.
+*	Tick all clocks forward.
 The OrreryTimepiece class uses a vector of pairs to store the label and corresponding CelestialDayClock pointers.
 
 ## About Representing Time
