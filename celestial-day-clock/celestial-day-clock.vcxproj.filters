@@ -41,5 +41,8 @@
     <ClInclude Include="galactictimepiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="celestialtimepiece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

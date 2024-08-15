@@ -1,6 +1,7 @@
 #ifndef GALACTIC_TIMEPIECE_H
 #define GALACTIC_TIMEPIECE_H
 
+#include "celestialtimepiece.h"
 #include "orrerytimepiece.h"
 #include <vector>
 #include <string>
@@ -10,7 +11,7 @@
 #include <chrono>
 #include <iostream>
 
-class GalacticTimepiece {
+class GalacticTimepiece : CelestialTimepiece {
 public:
 	GalacticTimepiece() : running(false) {}
 

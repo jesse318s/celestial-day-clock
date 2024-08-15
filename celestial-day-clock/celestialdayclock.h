@@ -1,13 +1,14 @@
 #ifndef CELESTIAL_DAY_CLOCK_H
 #define CELESTIAL_DAY_CLOCK_H
 
+#include "celestialtimepiece.h"
 #include "numeric_limits.h"
 #include <ctime>
 #include <string>
 
 /* A generic clock that keeps track of a celestial body's time of day using the new time type functionality
    from the custom numeric limits template */
-class CelestialDayClock {
+class CelestialDayClock : CelestialTimepiece {
 public:
 	static const char delimiter = ':';
 	static const char anteChar = 'A';

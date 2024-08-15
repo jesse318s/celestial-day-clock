@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="celestialdayclock.h" />
+    <ClInclude Include="celestialtimepiece.h" />
     <ClInclude Include="galactictimepiece.h" />
     <ClInclude Include="numeric_limits.h" />
     <ClInclude Include="orrerytimepiece.h" />

@@ -1,12 +1,13 @@
 #ifndef ORRERY_TIMEPIECE_H
 #define ORRERY_TIMEPIECE_H
 
+#include "celestialtimepiece.h"
 #include "celestialdayclock.h"
 #include <vector>
 #include <string>
 #include <utility>
 
-class OrreryTimepiece {
+class OrreryTimepiece : CelestialTimepiece {
 public:
 	~OrreryTimepiece();
 
