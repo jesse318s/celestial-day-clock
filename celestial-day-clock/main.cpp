@@ -482,11 +482,10 @@ static void displayStandardOrreryTimepiece() {
 
 static GalacticTimepiece* createGalacticTimepiece() {
 	GalacticTimepiece* timepiece = new GalacticTimepiece();
-	OrreryTimepiece* orreryTimepiece = nullptr;
+	OrreryTimepiece* orreryTimepiece = createOrreryTimepiece();
 
 	std::srand(static_cast<unsigned int>(std::time(0)));
 
-	orreryTimepiece = createOrreryTimepiece();
 	timepiece->add("Galaxy A - ", orreryTimepiece);
 	orreryTimepiece = createOrreryTimepiece();
 	timepiece->add("Galaxy B - ", orreryTimepiece);
