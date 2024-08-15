@@ -14,7 +14,7 @@ void OrreryTimepiece::clear() {
 	clocks.clear();
 }
 
-std::vector<std::string> OrreryTimepiece::getAllTimesMilitary() const {
+std::vector<std::string> OrreryTimepiece::getTimesMilitary() const {
 	std::vector<std::string> times;
 
 	for (const std::pair<std::string, CelestialDayClock*>& clock : clocks) {
@@ -24,7 +24,7 @@ std::vector<std::string> OrreryTimepiece::getAllTimesMilitary() const {
 	return times;
 }
 
-std::vector<std::string> OrreryTimepiece::getAllTimes() const {
+std::vector<std::string> OrreryTimepiece::getTimes() const {
 	std::vector<std::string> times;
 
 	for (const std::pair<std::string, CelestialDayClock*>& clock : clocks) {

@@ -18,9 +18,9 @@ public:
 
 	void clear();
 
-	std::vector<std::string> getAllTimesMilitary() const;
+	std::vector<std::string> getTimesMilitary() const;
 
-	std::vector<std::string> getAllTimes() const;
+	std::vector<std::string> getTimes() const;
 
 	void tick();
 

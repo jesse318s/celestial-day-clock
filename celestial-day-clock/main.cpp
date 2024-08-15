@@ -459,7 +459,7 @@ static void displayStandardOrreryTimepiece(std::unique_ptr<OrreryTimepiece> time
 
 	std::cout << std::endl;
 
-	for (const std::string& time : timepiece->getAllTimes()) {
+	for (const std::string& time : timepiece->getTimes()) {
 		std::cout << time << std::endl;
 	}
 
@@ -473,7 +473,7 @@ static void displayStandardOrreryTimepiece(std::unique_ptr<OrreryTimepiece> time
 			std::cout << cdc_test::ansiPreviousLineDeletion;
 		}
 
-		for (const std::string& time : timepiece->getAllTimes()) {
+		for (const std::string& time : timepiece->getTimes()) {
 			std::cout << time << std::endl;
 		}
 
