@@ -1,6 +1,7 @@
 #include "numeric_limits.h"
 #include "celestialdayclock.h"
 #include "orrerytimepiece.h"
+#include "galactictimepiece.h"
 #include <iostream>
 #include <cassert>
 #include <string>
@@ -8,6 +9,7 @@
 #include <utility>
 #include <map>
 #include <unordered_map>
+#include <memory>
 #include <thread>
 #include <cstdlib>
 
@@ -434,8 +436,8 @@ static void displayPlanetaryCDCMenu() {
 	if (itr != planetDayLengths.end()) displayStandardCDC(itr->second.hours, itr->second.minutes);
 }
 
-static std::unique_ptr<OrreryTimepiece> createSolarSystemTimepiece() {
-	std::unique_ptr<OrreryTimepiece> timepiece = std::make_unique<OrreryTimepiece>();
+static OrreryTimepiece* createOrreryTimepiece() {
+	OrreryTimepiece* timepiece = new OrreryTimepiece();
 	CelestialDayClock* clock = nullptr;
 
 	std::srand(static_cast<unsigned int>(std::time(0)));
@@ -453,7 +455,8 @@ static std::unique_ptr<OrreryTimepiece> createSolarSystemTimepiece() {
 	return timepiece;
 }
 
-static void displayStandardOrreryTimepiece(std::unique_ptr<OrreryTimepiece> timepiece) {
+static void displayStandardOrreryTimepiece() {
+	std::unique_ptr<OrreryTimepiece> timepiece(createOrreryTimepiece());
 	std::chrono::time_point<std::chrono::steady_clock> nextTick =
 		std::chrono::steady_clock::now() + std::chrono::seconds(1);
 
@@ -469,9 +472,44 @@ static void displayStandardOrreryTimepiece(std::unique_ptr<OrreryTimepiece> time
 		std::this_thread::sleep_until(nextTick);
 		nextTick += std::chrono::seconds(1);
 
-		for (int i = 0; i < timepiece->getSize(); ++i) {
-			std::cout << cdc_test::ansiPreviousLineDeletion;
+		for (const std::string& time : timepiece->getTimes()) {
+			std::cout << time << std::endl;
 		}
+
+		timepiece->tick();
+	}
+}
+
+static GalacticTimepiece* createGalacticTimepiece() {
+	GalacticTimepiece* timepiece = new GalacticTimepiece();
+	OrreryTimepiece* orreryTimepiece = nullptr;
+
+	std::srand(static_cast<unsigned int>(std::time(0)));
+
+	orreryTimepiece = createOrreryTimepiece();
+	timepiece->add("Galaxy A - ", orreryTimepiece);
+	orreryTimepiece = createOrreryTimepiece();
+	timepiece->add("Galaxy B - ", orreryTimepiece);
+
+	return timepiece;
+}
+
+static void displayStandardGalacticTimepiece() {
+	std::unique_ptr<GalacticTimepiece> timepiece(createGalacticTimepiece());
+	std::chrono::time_point<std::chrono::steady_clock> nextTick =
+		std::chrono::steady_clock::now() + std::chrono::seconds(1);
+
+	std::cout << std::endl;
+
+	for (const std::string& time : timepiece->getTimes()) {
+		std::cout << time << std::endl;
+	}
+
+	timepiece->tick();
+
+	while (true) {
+		std::this_thread::sleep_until(nextTick);
+		nextTick += std::chrono::seconds(1);
 
 		for (const std::string& time : timepiece->getTimes()) {
 			std::cout << time << std::endl;
@@ -484,8 +522,9 @@ static void displayStandardOrreryTimepiece(std::unique_ptr<OrreryTimepiece> time
 static void displayCDCMenu() {
 	constexpr int planetChoice = 1;
 	constexpr int orreryChoice = planetChoice + 1;
+	constexpr int galacticChoice = orreryChoice + 1;
 	const std::string range =
-		std::to_string(planetChoice) + " and " + std::to_string(orreryChoice);
+		std::to_string(planetChoice) + " and " + std::to_string(galacticChoice);
 	int choice = 0;
 	bool validChoice = false;
 
@@ -494,9 +533,10 @@ static void displayCDCMenu() {
 		std::cout << "\n\nChoose to display a planet clock or an orrery timepiece: " << std::endl;
 		std::cout << std::to_string(planetChoice) + ". Display a planet clock" << std::endl;
 		std::cout << std::to_string(orreryChoice) + ". Display an orrery timepiece" << std::endl;
+		std::cout << std::to_string(galacticChoice) + ". Display a galactic timepiece" << std::endl;
 		std::cin >> choice;
 
-		if (std::cin.fail() || choice < planetChoice || choice > orreryChoice) {
+		if (std::cin.fail() || choice < planetChoice || choice > galacticChoice) {
 			validChoice = false;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -506,5 +546,7 @@ static void displayCDCMenu() {
 
 	if (choice == 1) displayPlanetaryCDCMenu();
 
-	if (choice == 2) displayStandardOrreryTimepiece(createSolarSystemTimepiece());
+	if (choice == 2) displayStandardOrreryTimepiece();
+
+	if (choice == 3) displayStandardGalacticTimepiece();
 }
