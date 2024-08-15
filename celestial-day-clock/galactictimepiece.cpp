@@ -56,6 +56,8 @@ void GalacticTimepiece::tick() {
 }
 
 void GalacticTimepiece::startTicking() {
+	if (running) return;
+
 	running = true;
 
 	thread = std::thread([this]() {
