@@ -55,16 +55,12 @@ void GalacticTimepiece::startTicking() {
 
 	thread = std::thread([this]() {
 		auto nextTick = std::chrono::steady_clock::now() + std::chrono::seconds(1);
-		auto start = std::chrono::steady_clock::now();
-		auto end = std::chrono::steady_clock::now();
-		auto tickDuration =
-			std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 
 		while (running) {
-			start = std::chrono::steady_clock::now();
+			const auto start = std::chrono::steady_clock::now();
 			tick();
-			end = std::chrono::steady_clock::now();
-			tickDuration =
+			const auto end = std::chrono::steady_clock::now();
+			const auto tickDuration =
 				std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 
 			if (tickDuration > 1000)
