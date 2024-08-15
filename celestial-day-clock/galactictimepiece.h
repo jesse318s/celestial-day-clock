@@ -18,9 +18,7 @@ public:
 
 	size_t getSize() const { return timepieces.size(); }
 
-	void add(const std::string& label, OrreryTimepiece* timepiece) {
-		timepieces.emplace_back(label, timepiece);
-	}
+	void add(const std::string& label, OrreryTimepiece* timepiece);
 
 	void clear();
 

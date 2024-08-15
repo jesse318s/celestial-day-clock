@@ -8,6 +8,11 @@ GalacticTimepiece::~GalacticTimepiece() {
 	}
 }
 
+void GalacticTimepiece::add(const std::string& label, OrreryTimepiece* timepiece) {
+	stopTicking();
+	timepieces.emplace_back(label, timepiece);
+}
+
 void GalacticTimepiece::clear() {
 	stopTicking();
 
