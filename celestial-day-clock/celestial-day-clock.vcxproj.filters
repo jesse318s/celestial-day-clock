@@ -24,6 +24,9 @@
     <ClCompile Include="orrerytimepiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="galactictimepiece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="celestialdayclock.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="orrerytimepiece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="galactictimepiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
