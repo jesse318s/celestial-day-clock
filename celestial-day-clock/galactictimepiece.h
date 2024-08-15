@@ -17,7 +17,7 @@ public:
 
 	~GalacticTimepiece();
 
-	size_t getSize() const { return timepieces.size(); }
+	size_t getSize() const;
 
 	void add(const std::string& label, OrreryTimepiece* timepiece);
 

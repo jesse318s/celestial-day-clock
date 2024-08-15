@@ -8,6 +8,16 @@ GalacticTimepiece::~GalacticTimepiece() {
 	}
 }
 
+size_t GalacticTimepiece::getSize() const {
+	size_t size = 0;
+
+	for (const std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
+		size += timepiece.second->getSize();
+	}
+
+	return size;
+}
+
 void GalacticTimepiece::add(const std::string& label, OrreryTimepiece* timepiece) {
 	stopTicking();
 	timepieces.emplace_back(label, timepiece);
