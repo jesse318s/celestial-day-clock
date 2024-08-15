@@ -28,7 +28,7 @@ std::vector<std::string> OrreryTimepiece::getAllTimes() const {
 	std::vector<std::string> times;
 
 	for (const std::pair<std::string, CelestialDayClock*>& clock : clocks) {
-		times.emplace_back(clock.first + ' ' + clock.second->getTime());
+		times.emplace_back(clock.first + clock.second->getTime());
 	}
 
 	return times;

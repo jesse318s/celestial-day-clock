@@ -447,7 +447,7 @@ static std::unique_ptr<OrreryTimepiece> createSolarSystemTimepiece() {
 		clock->setMinutesDigit2(std::rand() % cdc_test::decimalRadix);
 		clock->setSecondsDigit1(std::rand() % cdc_test::senaryRadix);
 		clock->setSecondsDigit2(std::rand() % cdc_test::decimalRadix);
-		timepiece->add(planetNames.at(planet.first) + ':', clock);
+		timepiece->add(planetNames.at(planet.first) + cdc_test::delimiter + ' ', clock);
 	}
 
 	return timepiece;
