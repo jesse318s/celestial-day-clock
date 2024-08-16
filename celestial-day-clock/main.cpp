@@ -486,9 +486,9 @@ static GalacticTimepiece* createGalacticTimepiece() {
 
 	std::srand(static_cast<unsigned int>(std::time(0)));
 
-	timepiece->add("Galaxy A - ", orreryTimepiece);
+	timepiece->add("Star System A - ", orreryTimepiece);
 	orreryTimepiece = createOrreryTimepiece();
-	timepiece->add("Galaxy B - ", orreryTimepiece);
+	timepiece->add("Star System B - ", orreryTimepiece);
 
 	return timepiece;
 }
