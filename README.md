@@ -48,3 +48,5 @@ The GalacticTimepiece class manages multiple OrreryTimepiece instances. It provi
 *	Retrieve all times in standard format
 *	Tick all timepieces forward
 *	Start and stop the ticking process
+
+The GalacticTimepiece class uses a vector of pairs to store the label and corresponding OrreryTimepiece pointers.
