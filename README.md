@@ -37,3 +37,14 @@ The OrreryTimepiece class manages multiple CelestialDayClock instances. It allow
 *	Tick all clocks forward
 
 The OrreryTimepiece class uses a vector of pairs to store the label and corresponding CelestialDayClock pointers.
+
+## GalacticTimepiece Class
+
+The GalacticTimepiece class manages multiple OrreryTimepiece instances. It provides functionality to:
+*	Retrieve the total size of all timepieces
+*	Add a new timepiece with a label
+*	Clear all timepieces
+*	Retrieve all times in military format
+*	Retrieve all times in standard format
+*	Tick all timepieces forward
+*	Start and stop the ticking process
