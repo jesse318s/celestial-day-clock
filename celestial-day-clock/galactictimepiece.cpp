@@ -62,7 +62,7 @@ void GalacticTimepiece::tick() {
 	const std::vector<std::pair<std::string, OrreryTimepiece*>>::iterator mid =
 		timepieces.begin() + timepieces.size() / 2;
 
-	const auto tickRange = [](auto start, auto end) {
+	const auto tickRange = [](auto start, const auto end) {
 		for (auto& itr = start; itr != end; ++itr) {
 			itr->second->tick();
 		}
