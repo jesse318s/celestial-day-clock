@@ -33,8 +33,10 @@ void GalacticTimepiece::clear() {
 	timepieces.clear();
 }
 
-std::vector<std::string> GalacticTimepiece::getTimesMilitary() const {
+std::vector<std::string> GalacticTimepiece::getTimesMilitary() {
 	std::vector<std::string> times;
+
+	stopTicking();
 
 	for (const std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
 		for (const std::string& time : timepiece.second->getTimesMilitary()) {
@@ -45,8 +47,10 @@ std::vector<std::string> GalacticTimepiece::getTimesMilitary() const {
 	return times;
 }
 
-std::vector<std::string> GalacticTimepiece::getTimes() const {
+std::vector<std::string> GalacticTimepiece::getTimes() {
 	std::vector<std::string> times;
+
+	stopTicking();
 
 	for (const std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
 		for (const std::string& time : timepiece.second->getTimes()) {
