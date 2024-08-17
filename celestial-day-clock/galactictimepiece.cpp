@@ -59,10 +59,22 @@ std::vector<std::string> GalacticTimepiece::getTimes() const {
 
 void GalacticTimepiece::tick() {
 	std::lock_guard<std::mutex> lock(mtx);
+	const std::vector<std::pair<std::string, OrreryTimepiece*>>::iterator mid =
+		timepieces.begin() + timepieces.size() / 2;
 
-	for (std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
-		timepiece.second->tick();
-	}
+	const auto tickRange = [](auto start, auto end) {
+		for (auto& itr = start; itr != end; ++itr) {
+			itr->second->tick();
+		}
+		};
+
+	std::future<void> firstHalf = 
+		std::async(std::launch::async, tickRange, timepieces.begin(), mid);
+	std::future<void> secondHalf = 
+		std::async(std::launch::async, tickRange, mid, timepieces.end());
+
+	firstHalf.get();
+	secondHalf.get();
 }
 
 void GalacticTimepiece::startTicking() {
