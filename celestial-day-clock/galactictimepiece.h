@@ -6,11 +6,11 @@
 #include <vector>
 #include <string>
 #include <utility>
-#include <thread>
-#include <mutex>
 #include <future>
+#include <mutex>
 #include <chrono>
 #include <iostream>
+#include <thread>
 
 class GalacticTimepiece : CelestialTimepiece {
 public:
@@ -36,7 +36,7 @@ public:
 
 private:
 	std::vector<std::pair<std::string, OrreryTimepiece*>> timepieces;
-	std::thread thread;
+	std::future<void> tickingFuture;
 	std::mutex mtx;
 	bool running;
 };

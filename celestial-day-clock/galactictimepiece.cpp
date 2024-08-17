@@ -68,9 +68,9 @@ void GalacticTimepiece::tick() {
 		}
 		};
 
-	std::future<void> firstHalf = 
+	std::future<void> firstHalf =
 		std::async(std::launch::async, tickRange, timepieces.begin(), mid);
-	std::future<void> secondHalf = 
+	std::future<void> secondHalf =
 		std::async(std::launch::async, tickRange, mid, timepieces.end());
 
 	firstHalf.get();
@@ -82,7 +82,7 @@ void GalacticTimepiece::startTicking() {
 
 	running = true;
 
-	thread = std::thread([this]() {
+	auto tickingTask = [this]() {
 		auto nextTick = std::chrono::steady_clock::now() + std::chrono::seconds(1);
 
 		while (running) {
@@ -98,11 +98,13 @@ void GalacticTimepiece::startTicking() {
 			std::this_thread::sleep_until(nextTick);
 			nextTick += std::chrono::seconds(1);
 		}
-		});
+		};
+
+	tickingFuture = std::async(std::launch::async, tickingTask);
 }
 
 void GalacticTimepiece::stopTicking() {
 	running = false;
 
-	if (thread.joinable()) thread.join();
+	if (tickingFuture.valid()) tickingFuture.get();
 }
