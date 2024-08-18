@@ -17,8 +17,8 @@ void OrreryTimepiece::clear() {
 std::vector<std::string> OrreryTimepiece::getTimesMilitary() const {
 	std::vector<std::string> times;
 
-	for (const std::pair<std::string, CelestialDayClock*>& clock : clocks) {
-		times.emplace_back(clock.first + clock.second->getTimeMilitary());
+	for (const auto& [label, clock] : clocks) {
+		times.emplace_back(label + clock->getTimeMilitary());
 	}
 
 	return times;
@@ -27,8 +27,8 @@ std::vector<std::string> OrreryTimepiece::getTimesMilitary() const {
 std::vector<std::string> OrreryTimepiece::getTimes() const {
 	std::vector<std::string> times;
 
-	for (const std::pair<std::string, CelestialDayClock*>& clock : clocks) {
-		times.emplace_back(clock.first + clock.second->getTime());
+	for (const auto& [label, clock] : clocks) {
+		times.emplace_back(label + clock->getTime());
 	}
 
 	return times;

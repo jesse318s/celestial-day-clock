@@ -416,8 +416,8 @@ static void displayPlanetaryCDCMenu() {
 		validChoice = true;
 		std::cout << "\n\nChoose a planet to display its standard clock: " << std::endl;
 
-		for (const std::pair<PlanetChoice, std::string>& planet : planetNames) {
-			std::cout << planet.first << ". " << planet.second << std::endl;
+		for (const auto& [planetChoice, planetName] : planetNames) {
+			std::cout << planetChoice << ". " << planetName << std::endl;
 		}
 
 		std::cin >> choice;
@@ -442,14 +442,14 @@ static OrreryTimepiece* createOrreryTimepiece() {
 
 	std::srand(static_cast<unsigned int>(std::time(0)));
 
-	for (const std::pair<PlanetChoice, CelestialDay>& planet : planetDayLengths) {
-		clock = new CelestialDayClock(planet.second.hours, planet.second.minutes);
+	for (const auto& [planetChoice, celestialDay] : planetDayLengths) {
+		clock = new CelestialDayClock(celestialDay.hours, celestialDay.minutes);
 		clock->setHours(std::rand() % 2);
 		clock->setMinutesDigit1(std::rand() % cdc_test::senaryRadix);
 		clock->setMinutesDigit2(std::rand() % cdc_test::decimalRadix);
 		clock->setSecondsDigit1(std::rand() % cdc_test::senaryRadix);
 		clock->setSecondsDigit2(std::rand() % cdc_test::decimalRadix);
-		timepiece->add(planetNames.at(planet.first) + cdc_test::delimiter + ' ', clock);
+		timepiece->add(planetNames.at(planetChoice) + cdc_test::delimiter + ' ', clock);
 	}
 
 	return timepiece;

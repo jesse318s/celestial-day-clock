@@ -38,9 +38,9 @@ std::vector<std::string> GalacticTimepiece::getTimesMilitary() {
 
 	stopTicking();
 
-	for (const std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
-		for (const std::string& time : timepiece.second->getTimesMilitary()) {
-			times.emplace_back(timepiece.first + time);
+	for (const auto& [label, timepiece] : timepieces) {
+		for (const std::string& time : timepiece->getTimesMilitary()) {
+			times.emplace_back(label + time);
 		}
 	}
 
@@ -52,9 +52,9 @@ std::vector<std::string> GalacticTimepiece::getTimes() {
 
 	stopTicking();
 
-	for (const std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
-		for (const std::string& time : timepiece.second->getTimes()) {
-			times.emplace_back(timepiece.first + time);
+	for (const auto& [label, timepiece] : timepieces) {
+		for (const std::string& time : timepiece->getTimes()) {
+			times.emplace_back(label + time);
 		}
 	}
 
