@@ -100,6 +100,10 @@ static void testCDCMilitaryTime();
 
 static void testCDCStandardTime();
 
+static void testOrreryTimepiece();
+
+static void testGalacticTimepiece();
+
 static void displayCDCMenu();
 
 int main() {
@@ -109,6 +113,8 @@ int main() {
 		testNewNumericLimits();
 		testCDCMilitaryTime();
 		testCDCStandardTime();
+		testOrreryTimepiece();
+		testGalacticTimepiece();
 		// Demonstrating the use of the celestialdayclock class
 		displayCDCMenu();
 	}
@@ -387,6 +393,42 @@ static void testCDCStandardTime() {
 	testStandardTime5(clock);
 	delete clock;
 	std::cout << "\nEnd celestial day clock standard time test." << std::endl;
+}
+
+static void testOrreryTimepiece() {
+	std::cout << "\n\nTesting orrery timepiece..." << std::endl;
+	OrreryTimepiece* timepiece = new OrreryTimepiece();
+
+	timepiece->add("0. ", new CelestialDayClock(cdc_test::hours, 0));
+	timepiece->add("1. ", new CelestialDayClock(cdc_test::hours, cdc_test::minutes));
+	assert(timepiece->getTimesMilitary()[0] == "0. " + cdc_test::zeroTimeString);
+	assert(timepiece->getTimesMilitary()[1] == "1. " + cdc_test::zeroTimeString);
+	timepiece->tick();
+	assert(timepiece->getTimesMilitary()[0] == "0. " + cdc_test::oneSecondTimeString);
+	assert(timepiece->getTimesMilitary()[1] == "1. " + cdc_test::oneSecondTimeString);
+	delete timepiece;
+	std::cout << cdc_test::passed << std::endl;
+}
+
+static void testGalacticTimepiece() {
+	std::cout << "\n\nTesting galactic timepiece..." << std::endl;
+	GalacticTimepiece* timepiece = new GalacticTimepiece();
+	OrreryTimepiece* orreryTimepiece0 = new OrreryTimepiece();
+	OrreryTimepiece* orreryTimepiece1 = new OrreryTimepiece();
+
+	orreryTimepiece0->add("0. ", new CelestialDayClock(cdc_test::hours, 0));
+	orreryTimepiece0->add("1. ", new CelestialDayClock(cdc_test::hours, cdc_test::minutes));
+	orreryTimepiece1->add("0. ", new CelestialDayClock(cdc_test::hours, 0));
+	orreryTimepiece1->add("1. ", new CelestialDayClock(cdc_test::hours, cdc_test::minutes));
+	timepiece->add("0. ", orreryTimepiece0);
+	timepiece->add("1. ", orreryTimepiece1);
+	assert(timepiece->getTimesMilitary()[0] == "0. 0. " + cdc_test::zeroTimeString);
+	assert(timepiece->getTimesMilitary().back() == "1. 1. " + cdc_test::zeroTimeString);
+	timepiece->tick();
+	assert(timepiece->getTimesMilitary()[0] == "0. 0. " + cdc_test::oneSecondTimeString);
+	assert(timepiece->getTimesMilitary().back() == "1. 1. " + cdc_test::oneSecondTimeString);
+	delete timepiece;
+	std::cout << cdc_test::passed << std::endl;
 }
 
 static void displayStandardCDC(const int h, const int m) {
