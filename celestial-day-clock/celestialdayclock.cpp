@@ -1,44 +1,14 @@
 #include "celestialdayclock.h"
 
-void CelestialDayClock::setHours(int h) {
-	if (h > maxHours) h = maxHours;
+void CelestialDayClock::setHours(int h) { hours = clamp(h, maxHours); }
 
-	if (h < 0) h = 0;
+void CelestialDayClock::setMinutesDigit1(int m) { minutesDigit1 = clamp(m, radix - 1); }
 
-	hours = h;
-}
+void CelestialDayClock::setMinutesDigit2(int m) { minutesDigit2 = clamp(m, secondaryRadix - 1); }
 
-void CelestialDayClock::setMinutesDigit1(int m) {
-	if (m > radix - 1) m = radix - 1;
+void CelestialDayClock::setSecondsDigit1(int s) { secondsDigit1 = clamp(s, radix - 1); }
 
-	if (m < 0) m = 0;
-
-	minutesDigit1 = m;
-}
-
-void CelestialDayClock::setMinutesDigit2(int m) {
-	if (m > secondaryRadix - 1) m = secondaryRadix - 1;
-
-	if (m < 0) m = 0;
-
-	minutesDigit2 = m;
-}
-
-void CelestialDayClock::setSecondsDigit1(int s) {
-	if (s > radix - 1) s = radix - 1;
-
-	if (s < 0) s = 0;
-
-	secondsDigit1 = s;
-}
-
-void CelestialDayClock::setSecondsDigit2(int s) {
-	if (s > secondaryRadix - 1) s = secondaryRadix - 1;
-
-	if (s < 0) s = 0;
-
-	secondsDigit2 = s;
-}
+void CelestialDayClock::setSecondsDigit2(int s) { secondsDigit2 = clamp(s, secondaryRadix - 1); }
 
 void CelestialDayClock::setBodyMaximums(int h, int m) {
 	constexpr int halfMaxBodyMinutes =
@@ -159,6 +129,14 @@ void CelestialDayClock::tick() {
 			tickMinutes();
 		}
 	}
+}
+
+int CelestialDayClock::clamp(const int value, const int max) const {
+	if (value > max) return max;
+
+	if (value < 0) return 0;
+
+	return value;
 }
 
 void CelestialDayClock::tickMinutes() {

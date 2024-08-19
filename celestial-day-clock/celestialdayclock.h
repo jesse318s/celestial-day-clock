@@ -59,6 +59,8 @@ private:
 	int secondsDigit1 = 0;
 	int secondsDigit2 = 0;
 
+	int clamp(const int value, const int max) const;
+
 	void tickMinutes();
 };
 
