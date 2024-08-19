@@ -7,6 +7,7 @@
 #include <string>
 #include <utility>
 
+// A collection of CelestialDayClocks that keeps track of a star system's time
 class OrreryTimepiece : CelestialTimepiece {
 public:
 	~OrreryTimepiece();

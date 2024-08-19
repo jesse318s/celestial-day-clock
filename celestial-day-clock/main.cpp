@@ -110,14 +110,14 @@ int main() {
 	std::srand(static_cast<unsigned int>(std::time(0)));
 
 	try {
-		// Testing the new numeric_limits template and the dependent celestialdayclock class
+		// Testing the new numeric_limits template and the dependent CelestialDayClock class
 		testSimplifiedNumericLimits();
 		testNewNumericLimits();
 		testCDCMilitaryTime();
 		testCDCStandardTime();
 		testOrreryTimepiece();
 		testGalacticTimepiece();
-		// Demonstrating the use of the celestialdayclock class
+		// Demonstrating the use of the CelestialDayClock class
 		displayCDCMenu();
 	}
 	catch (const std::exception& e) {
