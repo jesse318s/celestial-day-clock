@@ -107,8 +107,9 @@ static void testGalacticTimepiece();
 static void displayCDCMenu();
 
 int main() {
+	std::srand(static_cast<unsigned int>(std::time(0)));
+
 	try {
-		std::srand(static_cast<unsigned int>(std::time(0)));
 		// Testing the new numeric_limits template and the dependent celestialdayclock class
 		testSimplifiedNumericLimits();
 		testNewNumericLimits();
