@@ -2,17 +2,16 @@
 
 void CelestialDayClock::setHours(int h) { hours = clamp(h, maxHours); }
 
-void CelestialDayClock::setMinutesDigit1(int m) { minutesDigit1 = clamp(m, radix - 1); }
+void CelestialDayClock::setMinutesDigit1(int m) { minutesDigit1 = clamp(m, radixMax); }
 
-void CelestialDayClock::setMinutesDigit2(int m) { minutesDigit2 = clamp(m, secondaryRadix - 1); }
+void CelestialDayClock::setMinutesDigit2(int m) { minutesDigit2 = clamp(m, secondaryRadixMax); }
 
-void CelestialDayClock::setSecondsDigit1(int s) { secondsDigit1 = clamp(s, radix - 1); }
+void CelestialDayClock::setSecondsDigit1(int s) { secondsDigit1 = clamp(s, radixMax); }
 
-void CelestialDayClock::setSecondsDigit2(int s) { secondsDigit2 = clamp(s, secondaryRadix - 1); }
+void CelestialDayClock::setSecondsDigit2(int s) { secondsDigit2 = clamp(s, secondaryRadixMax); }
 
 void CelestialDayClock::setBodyMaximums(int h, int m) {
-	constexpr int halfMaxBodyMinutes =
-		((radix - 1) / 2 * secondaryRadix + (secondaryRadix - 1)) - 1;
+	constexpr int halfMaxBodyMinutes = (radixMax / 2 * secondaryRadix + secondaryRadixMax) - 1;
 
 	if (h < maxHoursMin) h = maxHoursMin;
 
@@ -86,10 +85,10 @@ std::string CelestialDayClock::getTime() const {
 
 bool CelestialDayClock::checkTimeReset() {
 	const bool areHoursMax = hours >= maxHours - 1 &&
-		minutesDigit1 == radix - 1 && minutesDigit2 == secondaryRadix - 1;
+		minutesDigit1 == radixMax && minutesDigit2 == secondaryRadixMax;
 	const bool areMinutesMax = (hours == maxHours / 2 || hours >= maxHours) &&
 		minutesDigit1 * secondaryRadix + minutesDigit2 >= maxMinutes - 1;
-	const bool areSecondsMax = secondsDigit1 == radix - 1 && secondsDigit2 == secondaryRadix - 1;
+	const bool areSecondsMax = secondsDigit1 == radixMax && secondsDigit2 == secondaryRadixMax;
 	bool isReset = false;
 
 	if (maxMinutes == 0 && areHoursMax && areSecondsMax) {

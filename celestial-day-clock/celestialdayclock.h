@@ -16,7 +16,9 @@ public:
 	static const char meridiemChar = 'M';
 	static constexpr int maxHoursMin = 2;
 	static constexpr int radix = numeric_limits<std::time_t>::radices[0];
+	static constexpr int radixMax = radix - 1;
 	static constexpr int secondaryRadix = numeric_limits<std::time_t>::radices[1];
+	static constexpr int secondaryRadixMax = secondaryRadix - 1;
 
 	CelestialDayClock(int h, int m) { setBodyMaximums(h, m); }
 
