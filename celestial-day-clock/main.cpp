@@ -108,6 +108,7 @@ static void displayCDCMenu();
 
 int main() {
 	try {
+		std::srand(static_cast<unsigned int>(std::time(0)));
 		// Testing the new numeric_limits template and the dependent celestialdayclock class
 		testSimplifiedNumericLimits();
 		testNewNumericLimits();
@@ -481,8 +482,6 @@ static void displayPlanetaryCDCMenu() {
 static OrreryTimepiece* createOrreryTimepiece() {
 	OrreryTimepiece* timepiece = new OrreryTimepiece();
 	CelestialDayClock* clock = nullptr;
-
-	std::srand(static_cast<unsigned int>(std::time(0)));
 
 	for (const auto& [planetChoice, celestialDay] : planetDayLengths) {
 		clock = new CelestialDayClock(celestialDay.hours, celestialDay.minutes);
