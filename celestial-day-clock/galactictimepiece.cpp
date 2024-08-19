@@ -9,6 +9,9 @@ size_t GalacticTimepiece::getSize() const {
 	size_t size = 0;
 
 	for (const std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
+		if (timepiece.second == nullptr)
+			throw std::runtime_error("Null timepiece pointer encountered in getSize");
+
 		size += timepiece.second->getSize();
 	}
 
@@ -16,6 +19,8 @@ size_t GalacticTimepiece::getSize() const {
 }
 
 void GalacticTimepiece::add(const std::string& label, OrreryTimepiece* timepiece) {
+	if (timepiece == nullptr) throw std::invalid_argument("Cannot add a null timepiece");
+
 	stopTicking();
 	timepieces.emplace_back(label, timepiece);
 }
@@ -32,6 +37,9 @@ std::vector<std::string> GalacticTimepiece::getTimesMilitary() {
 	stopTicking();
 
 	for (const auto& [label, timepiece] : timepieces) {
+		if (timepiece == nullptr)
+			throw std::runtime_error("Null timepiece pointer encountered in getTimesMilitary");
+
 		for (const std::string& time : timepiece->getTimesMilitary()) {
 			times.emplace_back(label + time);
 		}
@@ -46,6 +54,9 @@ std::vector<std::string> GalacticTimepiece::getTimes() {
 	stopTicking();
 
 	for (const auto& [label, timepiece] : timepieces) {
+		if (timepiece == nullptr)
+			throw std::runtime_error("Null timepiece pointer encountered in getTimes");
+
 		for (const std::string& time : timepiece->getTimes()) {
 			times.emplace_back(label + time);
 		}
@@ -61,6 +72,9 @@ void GalacticTimepiece::tick() {
 
 	const auto tickRange = [](auto start, const auto end) {
 		for (auto& itr = start; itr != end; ++itr) {
+			if (itr->second == nullptr)
+				throw std::runtime_error("Null timepiece pointer encountered in tick");
+
 			itr->second->tick();
 		}
 		};
@@ -108,6 +122,9 @@ void GalacticTimepiece::stopTicking() {
 
 void GalacticTimepiece::deleteTimepieces() {
 	for (std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
-		delete timepiece.second;
+		if (timepiece.second != nullptr) {
+			delete timepiece.second;
+			timepiece.second = nullptr;
+		}
 	}
 }

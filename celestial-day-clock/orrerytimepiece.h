@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <utility>
+#include <stdexcept>
 
 // A collection of CelestialDayClocks that keeps track of a star system's time
 class OrreryTimepiece : public CelestialTimepiece {
@@ -14,9 +15,7 @@ public:
 
 	size_t getSize() const { return clocks.size(); }
 
-	void add(const std::string& label, CelestialDayClock* clock) {
-		clocks.emplace_back(label, clock);
-	}
+	void add(const std::string& label, CelestialDayClock* clock);
 
 	void clear();
 
