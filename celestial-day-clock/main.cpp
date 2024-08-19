@@ -26,7 +26,6 @@ namespace cdc_test {
 	const std::string nanString = "nan";
 	const std::string amIndicator = " AM";
 	const std::string pmIndicator = " PM";
-	const std::string ansiPreviousLineDeletion = "\033[A\033[2K";
 	const char delimiter = ':';
 	const std::string zeroTimeString = std::string(1, '0') + cdc_test::delimiter +
 		"00" + cdc_test::delimiter +
