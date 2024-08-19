@@ -22,7 +22,7 @@ public:
 
 	std::vector<std::string> getTimesMilitary() const;
 
-	std::vector<std::string> getTimes() const;
+	std::vector<std::string> getTimes() override;
 
 	void tick() override;
 

@@ -27,7 +27,7 @@ public:
 
 	std::vector<std::string> getTimesMilitary();
 
-	std::vector<std::string> getTimes();
+	std::vector<std::string> getTimes() override;
 
 	void tick() override;
 

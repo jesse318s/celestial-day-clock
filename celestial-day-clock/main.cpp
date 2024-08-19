@@ -435,20 +435,28 @@ static void testGalacticTimepiece() {
 	std::cout << cdc_test::passed << std::endl;
 }
 
-static void displayStandardCDC(const int h, const int m) {
-	const std::unique_ptr<CelestialDayClock> clock = std::make_unique<CelestialDayClock>(h, m);
+static void displayCelestialTimepiece(CelestialTimepiece* timepiecePtr) {
+	const std::unique_ptr<CelestialTimepiece> timepiece(timepiecePtr);
 	std::chrono::time_point<std::chrono::steady_clock> nextTick =
 		std::chrono::steady_clock::now() + std::chrono::seconds(1);
 
-	std::cout << '\n' + clock->getTime() << std::endl;
-	clock->tick();
+	std::cout << std::endl;
+
+	for (const std::string& time : timepiece->getTimes()) {
+		std::cout << time << std::endl;
+	}
+
+	timepiece->tick();
 
 	while (true) {
 		std::this_thread::sleep_until(nextTick);
 		nextTick += std::chrono::seconds(1);
-		std::cout << cdc_test::ansiPreviousLineDeletion;
-		std::cout << clock->getTime() << std::endl;
-		clock->tick();
+
+		for (const std::string& time : timepiece->getTimes()) {
+			std::cout << time << std::endl;
+		}
+
+		timepiece->tick();
 	}
 }
 
@@ -472,14 +480,16 @@ static void displayPlanetaryCDCMenu() {
 			validChoice = false;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Invalid choice. Please enter a number between " + range << std::endl;
+			std::cout << "Invalid planet choice number. Please enter a choice number between "
+				+ range << std::endl;
 		}
 	}
 
 	const std::unordered_map<PlanetChoice, CelestialDay>::const_iterator itr =
 		planetDayLengths.find(static_cast<PlanetChoice>(choice));
 
-	if (itr != planetDayLengths.end()) displayStandardCDC(itr->second.hours, itr->second.minutes);
+	if (itr != planetDayLengths.end())
+		displayCelestialTimepiece(new CelestialDayClock(itr->second.hours, itr->second.minutes));
 }
 
 static OrreryTimepiece* createOrreryTimepiece() {
@@ -499,31 +509,6 @@ static OrreryTimepiece* createOrreryTimepiece() {
 	return timepiece;
 }
 
-static void displayStandardOrreryTimepiece() {
-	std::unique_ptr<OrreryTimepiece> timepiece(createOrreryTimepiece());
-	std::chrono::time_point<std::chrono::steady_clock> nextTick =
-		std::chrono::steady_clock::now() + std::chrono::seconds(1);
-
-	std::cout << std::endl;
-
-	for (const std::string& time : timepiece->getTimes()) {
-		std::cout << time << std::endl;
-	}
-
-	timepiece->tick();
-
-	while (true) {
-		std::this_thread::sleep_until(nextTick);
-		nextTick += std::chrono::seconds(1);
-
-		for (const std::string& time : timepiece->getTimes()) {
-			std::cout << time << std::endl;
-		}
-
-		timepiece->tick();
-	}
-}
-
 static GalacticTimepiece* createGalacticTimepiece() {
 	GalacticTimepiece* timepiece = new GalacticTimepiece();
 	OrreryTimepiece* orreryTimepiece = createOrreryTimepiece();
@@ -533,31 +518,6 @@ static GalacticTimepiece* createGalacticTimepiece() {
 	timepiece->add("Star System B - ", orreryTimepiece);
 
 	return timepiece;
-}
-
-static void displayStandardGalacticTimepiece() {
-	std::unique_ptr<GalacticTimepiece> timepiece(createGalacticTimepiece());
-	std::chrono::time_point<std::chrono::steady_clock> nextTick =
-		std::chrono::steady_clock::now() + std::chrono::seconds(1);
-
-	std::cout << std::endl;
-
-	for (const std::string& time : timepiece->getTimes()) {
-		std::cout << time << std::endl;
-	}
-
-	timepiece->tick();
-
-	while (true) {
-		std::this_thread::sleep_until(nextTick);
-		nextTick += std::chrono::seconds(1);
-
-		for (const std::string& time : timepiece->getTimes()) {
-			std::cout << time << std::endl;
-		}
-
-		timepiece->tick();
-	}
 }
 
 static void displayCDCMenu() {
@@ -581,13 +541,14 @@ static void displayCDCMenu() {
 			validChoice = false;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Invalid choice. Please enter a number between " + range << std::endl;
+			std::cout << "Invalid menu choice number. Please enter a choice number between " +
+				range << std::endl;
 		}
 	}
 
 	if (choice == 1) displayPlanetaryCDCMenu();
 
-	if (choice == 2) displayStandardOrreryTimepiece();
+	if (choice == 2) displayCelestialTimepiece(createOrreryTimepiece());
 
-	if (choice == 3) displayStandardGalacticTimepiece();
+	if (choice == 3) displayCelestialTimepiece(createGalacticTimepiece());
 }

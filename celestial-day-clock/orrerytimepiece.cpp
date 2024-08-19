@@ -17,7 +17,7 @@ std::vector<std::string> OrreryTimepiece::getTimesMilitary() const {
 	return times;
 }
 
-std::vector<std::string> OrreryTimepiece::getTimes() const {
+std::vector<std::string> OrreryTimepiece::getTimes() {
 	std::vector<std::string> times;
 
 	for (const auto& [label, clock] : clocks) {

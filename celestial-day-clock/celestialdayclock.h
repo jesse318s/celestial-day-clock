@@ -5,6 +5,7 @@
 #include "numeric_limits.h"
 #include <ctime>
 #include <string>
+#include <vector>
 
 /* A generic clock that keeps track of a celestial body's time of day using the new time type functionality
    from the custom numeric limits template */
@@ -47,6 +48,8 @@ public:
 	std::string getMeridiemIndicator() const;
 
 	std::string getTime() const;
+
+	std::vector<std::string> getTimes() override;
 
 	bool checkTimeReset();
 

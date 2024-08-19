@@ -83,6 +83,15 @@ std::string CelestialDayClock::getTime() const {
 		std::to_string(secondsDigit1) + std::to_string(secondsDigit2) + getMeridiemIndicator();
 }
 
+std::vector<std::string> CelestialDayClock::getTimes() {
+	std::vector<std::string> times;
+
+	times.push_back(getTimeMilitary());
+	times.push_back(getTime());
+
+	return times;
+}
+
 bool CelestialDayClock::checkTimeReset() {
 	const bool areHoursMax = hours >= maxHours - 1 &&
 		minutesDigit1 == radixMax && minutesDigit2 == secondaryRadixMax;
