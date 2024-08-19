@@ -7,7 +7,6 @@ void CelestialDayClock::setHours(int h) {
 
 	hours = h;
 }
-int CelestialDayClock::getHours() const { return hours; }
 
 void CelestialDayClock::setMinutesDigit1(int m) {
 	if (m > radix - 1) m = radix - 1;
@@ -16,7 +15,6 @@ void CelestialDayClock::setMinutesDigit1(int m) {
 
 	minutesDigit1 = m;
 }
-int CelestialDayClock::getMinutesDigit1() const { return minutesDigit1; }
 
 void CelestialDayClock::setMinutesDigit2(int m) {
 	if (m > secondaryRadix - 1) m = secondaryRadix - 1;
@@ -25,7 +23,6 @@ void CelestialDayClock::setMinutesDigit2(int m) {
 
 	minutesDigit2 = m;
 }
-int CelestialDayClock::getMinutesDigit2() const { return minutesDigit2; }
 
 void CelestialDayClock::setSecondsDigit1(int s) {
 	if (s > radix - 1) s = radix - 1;
@@ -34,7 +31,6 @@ void CelestialDayClock::setSecondsDigit1(int s) {
 
 	secondsDigit1 = s;
 }
-int CelestialDayClock::getSecondsDigit1() const { return secondsDigit1; }
 
 void CelestialDayClock::setSecondsDigit2(int s) {
 	if (s > secondaryRadix - 1) s = secondaryRadix - 1;
@@ -43,7 +39,6 @@ void CelestialDayClock::setSecondsDigit2(int s) {
 
 	secondsDigit2 = s;
 }
-int CelestialDayClock::getSecondsDigit2() const { return secondsDigit2; }
 
 void CelestialDayClock::setBodyMaximums(int h, int m) {
 	constexpr int halfMaxBodyMinutes =

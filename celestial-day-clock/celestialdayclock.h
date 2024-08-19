@@ -21,19 +21,19 @@ public:
 	CelestialDayClock(int h, int m) { setBodyMaximums(h, m); }
 
 	void setHours(int h);
-	int getHours() const;
+	int getHours() const { return hours; }
 
 	void setMinutesDigit1(int m);
-	int getMinutesDigit1() const;
+	int getMinutesDigit1() const { return minutesDigit1; }
 
 	void setMinutesDigit2(int m);
-	int getMinutesDigit2() const;
+	int getMinutesDigit2() const { return minutesDigit2; }
 
 	void setSecondsDigit1(int s);
-	int getSecondsDigit1() const;
+	int getSecondsDigit1() const { return secondsDigit1; }
 
 	void setSecondsDigit2(int s);
-	int getSecondsDigit2() const;
+	int getSecondsDigit2() const { return secondsDigit2; }
 
 	void setBodyMaximums(int h, int m);
 	std::string getBodyMaximums() const;
