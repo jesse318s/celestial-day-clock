@@ -13,7 +13,7 @@
 #include <thread>
 
 // A collection of OrreryTimepieces that keeps track of a galaxy or galaxy group's time
-class GalacticTimepiece : CelestialTimepiece {
+class GalacticTimepiece : public CelestialTimepiece {
 public:
 	GalacticTimepiece() : running(false) {}
 

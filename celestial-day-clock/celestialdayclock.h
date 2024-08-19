@@ -8,7 +8,7 @@
 
 /* A generic clock that keeps track of a celestial body's time of day using the new time type functionality
    from the custom numeric limits template */
-class CelestialDayClock : CelestialTimepiece {
+class CelestialDayClock : public CelestialTimepiece {
 public:
 	static const char delimiter = ':';
 	static const char anteChar = 'A';
