@@ -1,16 +1,9 @@
 #include "orrerytimepiece.h"
 
-OrreryTimepiece::~OrreryTimepiece() {
-	for (std::pair<std::string, CelestialDayClock*>& clock : clocks) {
-		delete clock.second;
-	}
-}
+OrreryTimepiece::~OrreryTimepiece() { deleteClocks(); }
 
 void OrreryTimepiece::clear() {
-	for (std::pair<std::string, CelestialDayClock*>& clock : clocks) {
-		delete clock.second;
-	}
-
+	deleteClocks();
 	clocks.clear();
 }
 
@@ -37,5 +30,11 @@ std::vector<std::string> OrreryTimepiece::getTimes() const {
 void OrreryTimepiece::tick() {
 	for (std::pair<std::string, CelestialDayClock*>& clock : clocks) {
 		clock.second->tick();
+	}
+}
+
+void OrreryTimepiece::deleteClocks() {
+	for (std::pair<std::string, CelestialDayClock*>& clock : clocks) {
+		delete clock.second;
 	}
 }

@@ -2,10 +2,7 @@
 
 GalacticTimepiece::~GalacticTimepiece() {
 	stopTicking();
-
-	for (std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
-		delete timepiece.second;
-	}
+	deleteTimepieces();
 }
 
 size_t GalacticTimepiece::getSize() const {
@@ -25,11 +22,7 @@ void GalacticTimepiece::add(const std::string& label, OrreryTimepiece* timepiece
 
 void GalacticTimepiece::clear() {
 	stopTicking();
-
-	for (std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
-		delete timepiece.second;
-	}
-
+	deleteTimepieces();
 	timepieces.clear();
 }
 
@@ -111,4 +104,10 @@ void GalacticTimepiece::stopTicking() {
 	running = false;
 
 	if (tickingFuture.valid()) tickingFuture.get();
+}
+
+void GalacticTimepiece::deleteTimepieces() {
+	for (std::pair<std::string, OrreryTimepiece*>& timepiece : timepieces) {
+		delete timepiece.second;
+	}
 }

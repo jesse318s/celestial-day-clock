@@ -28,6 +28,8 @@ public:
 
 private:
 	std::vector<std::pair<std::string, CelestialDayClock*>> clocks;
+
+	void deleteClocks();
 };
 
 #endif

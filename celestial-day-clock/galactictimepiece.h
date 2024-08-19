@@ -40,6 +40,8 @@ private:
 	std::future<void> tickingFuture;
 	std::mutex mtx;
 	bool running;
+
+	void deleteTimepieces();
 };
 
 #endif
