@@ -35,25 +35,27 @@ namespace cdc_test {
 		"00" + cdc_test::delimiter +
 		"01";
 	constexpr int senaryRadix = 6;
+	constexpr int senaryRadixMax = senaryRadix - 1;
 	constexpr int decimalRadix = 10;
+	constexpr int decimalRadixMax = decimalRadix - 1;
 	constexpr int hours = 24;
 	constexpr int minutes = 58;
-	constexpr int expectedMinutes = (senaryRadix - 1) * decimalRadix + senaryRadix;
+	constexpr int expectedMinutes = senaryRadixMax * decimalRadix + senaryRadix;
 	const ClockUnitValues time1 = { hours / 2 - 1,
-	 senaryRadix - 1, decimalRadix - 1,
-	 senaryRadix - 1, decimalRadix - 1 };
+	 senaryRadixMax, decimalRadixMax,
+	 senaryRadixMax, decimalRadixMax };
 	const ClockUnitValues time2 = { hours - 1,
-	 senaryRadix - 1, decimalRadix - 1,
-	 senaryRadix - 1, decimalRadix - 1 };
+	 senaryRadixMax, decimalRadixMax,
+	 senaryRadixMax, decimalRadixMax };
 	const ClockUnitValues time3 = { hours / 2,
-	 (senaryRadix - 1) / 2, senaryRadix + 1,
-	 senaryRadix - 1, decimalRadix - 1 };
+	 senaryRadixMax / 2, senaryRadix + 1,
+	 senaryRadixMax, decimalRadixMax };
 	const ClockUnitValues time4 = { hours,
-	 senaryRadix - 1, decimalRadix - 1,
-	 senaryRadix - 1, decimalRadix - 1 };
+	 senaryRadixMax, decimalRadixMax,
+	 senaryRadixMax, decimalRadixMax };
 	const ClockUnitValues time5 = { hours + 1,
-	 (senaryRadix - 1) / 2, senaryRadix + 1,
-	 senaryRadix - 1, decimalRadix - 1 };
+	 senaryRadixMax / 2, senaryRadix + 1,
+	 senaryRadixMax, decimalRadixMax };
 }
 
 enum PlanetChoice {
