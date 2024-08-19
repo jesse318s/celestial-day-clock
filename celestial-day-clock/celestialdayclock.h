@@ -50,7 +50,7 @@ public:
 
 	bool checkTimeReset();
 
-	void tick();
+	void tick() override;
 
 private:
 	int maxHours = 0;

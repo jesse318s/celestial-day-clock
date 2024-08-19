@@ -24,7 +24,7 @@ public:
 
 	std::vector<std::string> getTimes() const;
 
-	void tick();
+	void tick() override;
 
 private:
 	std::vector<std::pair<std::string, CelestialDayClock*>> clocks;

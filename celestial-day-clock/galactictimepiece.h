@@ -29,7 +29,7 @@ public:
 
 	std::vector<std::string> getTimes();
 
-	void tick();
+	void tick() override;
 
 	void startTicking();
 
