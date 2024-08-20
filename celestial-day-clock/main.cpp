@@ -475,7 +475,8 @@ static void displayPlanetaryCDCMenu() {
 
 		std::cin >> choice;
 
-		if (std::cin.fail() || choice < PlanetChoice::Mercury || choice > PlanetChoice::MaxChoice) {
+		if (std::cin.fail() || 
+			choice < PlanetChoice::Mercury || choice > PlanetChoice::MaxChoice) {
 			validChoice = false;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
