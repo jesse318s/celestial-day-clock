@@ -109,23 +109,15 @@ static void displayCDCMenu();
 
 int main() {
 	std::srand(static_cast<unsigned int>(std::time(0)));
-
-	try {
-		// Testing the new numeric_limits template and the dependent CelestialDayClock class
-		testSimplifiedNumericLimits();
-		testNewNumericLimits();
-		testCDCMilitaryTime();
-		testCDCStandardTime();
-		testOrreryTimepiece();
-		testGalacticTimepiece();
-		// Demonstrating the use of the CelestialDayClock class
-		displayCDCMenu();
-	}
-	catch (const std::exception& e) {
-		std::cerr << std::string(1, '\n') + e.what() << std::endl;
-
-		return 1;
-	}
+	// Testing the new numeric_limits template and the dependent CelestialDayClock class
+	testSimplifiedNumericLimits();
+	testNewNumericLimits();
+	testCDCMilitaryTime();
+	testCDCStandardTime();
+	testOrreryTimepiece();
+	testGalacticTimepiece();
+	// Demonstrating the use of the CelestialDayClock class
+	displayCDCMenu();
 
 	return 0;
 }
@@ -441,21 +433,26 @@ static void displayCelestialTimepiece(CelestialTimepiece* timepiecePtr) {
 
 	std::cout << std::endl;
 
-	for (const std::string& time : timepiece->getTimes()) {
-		std::cout << time << std::endl;
-	}
-
-	timepiece->tick();
-
-	while (true) {
-		std::this_thread::sleep_until(nextTick);
-		nextTick += std::chrono::seconds(1);
-
+	try {
 		for (const std::string& time : timepiece->getTimes()) {
 			std::cout << time << std::endl;
 		}
 
 		timepiece->tick();
+
+		while (true) {
+			std::this_thread::sleep_until(nextTick);
+			nextTick += std::chrono::seconds(1);
+
+			for (const std::string& time : timepiece->getTimes()) {
+				std::cout << time << std::endl;
+			}
+
+			timepiece->tick();
+		}
+	}
+	catch (const std::exception& e) {
+		std::cerr << "Exception in displayCelestialTimepiece: " << e.what() << std::endl;
 	}
 }
 
@@ -475,7 +472,7 @@ static void displayPlanetaryCDCMenu() {
 
 		std::cin >> choice;
 
-		if (std::cin.fail() || 
+		if (std::cin.fail() ||
 			choice < PlanetChoice::Mercury || choice > PlanetChoice::MaxChoice) {
 			validChoice = false;
 			std::cin.clear();
