@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 
-/* A generic clock that keeps track of a celestial body's time of day using the new time type functionality
-   from the custom numeric limits template */
+/* A generic clock that keeps track of a celestial body's time of day using the new time type from
+   the custom numeric limits template */
 class CelestialDayClock : public CelestialTimepiece {
 public:
 	static const char delimiter = ':';

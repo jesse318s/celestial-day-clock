@@ -4,7 +4,7 @@
 #include <limits>
 #include <ctime>
 
-// A simplified version of std::numeric_limits with new unspecified type and time type functionality
+// A simplified version of std::numeric_limits with new unspecified type and time type
 struct unspecified_t {};
 
 template<typename T = unspecified_t>

@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-// Interface for a celestial timepiece that can provide the current times and tick to the next times
+// Interface for a celestial timepiece that provides the current times and ticks to the next times
 class CelestialTimepiece {
 public:
 	virtual ~CelestialTimepiece() {};

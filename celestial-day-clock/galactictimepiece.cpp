@@ -71,11 +71,15 @@ void GalacticTimepiece::tick() {
 		timepieces.begin() + timepieces.size() / 2;
 
 	const auto tickRange = [](auto start, const auto end) {
-		for (auto& itr = start; itr != end; ++itr) {
-			if (itr->second == nullptr)
-				throw std::runtime_error("Null timepiece pointer encountered in tick");
-
-			itr->second->tick();
+		try {
+			for (auto& itr = start; itr != end; ++itr) {
+				if (itr->second == nullptr) throw std::runtime_error("Null timepiece pointer encountered in tick");
+				itr->second->tick();
+			}
+		}
+		catch (const std::exception& e) {
+			std::cerr << "Exception in tickRange: " << e.what() << std::endl;
+			throw;
 		}
 		};
 
@@ -84,8 +88,14 @@ void GalacticTimepiece::tick() {
 	std::future<void> secondHalf =
 		std::async(std::launch::async, tickRange, mid, timepieces.end());
 
-	firstHalf.get();
-	secondHalf.get();
+	try {
+		firstHalf.get();
+		secondHalf.get();
+	}
+	catch (const std::exception& e) {
+		std::cerr << "Exception in tick: " << e.what() << std::endl;
+		stopTicking();
+	}
 }
 
 void GalacticTimepiece::startTicking() {
@@ -95,19 +105,20 @@ void GalacticTimepiece::startTicking() {
 
 	auto tickingTask = [this]() {
 		auto nextTick = std::chrono::steady_clock::now() + std::chrono::seconds(1);
-
-		while (running) {
-			const auto start = std::chrono::steady_clock::now();
-			tick();
-			const auto end = std::chrono::steady_clock::now();
-			const auto tickDuration =
-				std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-
-			if (tickDuration > 1000)
-				std::cerr << "Tick duration exceeded 1000 milliseconds" << std::endl;
-
-			std::this_thread::sleep_until(nextTick);
-			nextTick += std::chrono::seconds(1);
+		try {
+			while (running) {
+				const auto start = std::chrono::steady_clock::now();
+				tick();
+				const auto end = std::chrono::steady_clock::now();
+				const auto tickDuration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+				if (tickDuration > 1000) std::cerr << "Tick duration exceeded 1000 milliseconds" << std::endl;
+				std::this_thread::sleep_until(nextTick);
+				nextTick += std::chrono::seconds(1);
+			}
+		}
+		catch (const std::exception& e) {
+			std::cerr << "Exception in tickingTask: " << e.what() << std::endl;
+			stopTicking();
 		}
 		};
 
