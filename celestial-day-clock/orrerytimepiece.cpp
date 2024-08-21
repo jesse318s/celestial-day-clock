@@ -9,8 +9,10 @@ void OrreryTimepiece::add(const std::string& label, CelestialDayClock* clock) {
 		if (existingClock == nullptr)
 			throw std::runtime_error("Null clock pointer encountered in add");
 
-		if (label == existingLabel)
-			throw std::invalid_argument("Cannot add a clock with a duplicate label");
+		if (label == existingLabel) {
+			std::cerr << "Clock with label " << label << " already exists" << std::endl;
+			return;
+		}	
 	}
 
 	clocks.emplace_back(label, clock);

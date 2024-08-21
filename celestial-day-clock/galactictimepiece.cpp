@@ -25,8 +25,10 @@ void GalacticTimepiece::add(const std::string& label, OrreryTimepiece* timepiece
 		if (existingTimepiece == nullptr)
 			throw std::runtime_error("Null timepiece pointer encountered in add");
 
-		if (label == existingLabel)
-			throw std::invalid_argument("Cannot add a timepiece with a duplicate label");
+		if (label == existingLabel) {
+			std::cerr << "Timepiece with label " << label << " already exists" << std::endl;
+			return;
+		}
 	}
 
 	stopTicking();

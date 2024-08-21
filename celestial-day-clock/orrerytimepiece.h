@@ -7,6 +7,7 @@
 #include <string>
 #include <utility>
 #include <stdexcept>
+#include <iostream>
 
 // A collection of CelestialDayClocks that keeps track of a star system's time
 class OrreryTimepiece : public CelestialTimepiece {
