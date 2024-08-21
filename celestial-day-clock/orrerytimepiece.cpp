@@ -5,6 +5,14 @@ OrreryTimepiece::~OrreryTimepiece() { deleteClocks(); }
 void OrreryTimepiece::add(const std::string& label, CelestialDayClock* clock) {
 	if (clock == nullptr) throw std::invalid_argument("Cannot add a null clock");
 
+	for (const auto& [existingLabel, existingClock] : clocks) {
+		if (existingClock == nullptr)
+			throw std::runtime_error("Null clock pointer encountered in add");
+
+		if (label == existingLabel)
+			throw std::invalid_argument("Cannot add a clock with a duplicate label");
+	}
+
 	clocks.emplace_back(label, clock);
 }
 

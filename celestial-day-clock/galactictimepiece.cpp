@@ -21,6 +21,14 @@ size_t GalacticTimepiece::getSize() const {
 void GalacticTimepiece::add(const std::string& label, OrreryTimepiece* timepiece) {
 	if (timepiece == nullptr) throw std::invalid_argument("Cannot add a null timepiece");
 
+	for (const auto& [existingLabel, existingTimepiece] : timepieces) {
+		if (existingTimepiece == nullptr)
+			throw std::runtime_error("Null timepiece pointer encountered in add");
+
+		if (label == existingLabel)
+			throw std::invalid_argument("Cannot add a timepiece with a duplicate label");
+	}
+
 	stopTicking();
 	timepieces.emplace_back(label, timepiece);
 }
