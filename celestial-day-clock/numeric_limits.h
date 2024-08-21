@@ -1,6 +1,8 @@
 #ifndef NUMERIC_LIMITS_H
 #define NUMERIC_LIMITS_H
 
+#include <climits>
+#include <cfloat>
 #include <limits>
 #include <ctime>
 
