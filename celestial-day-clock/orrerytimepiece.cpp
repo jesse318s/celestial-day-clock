@@ -12,7 +12,7 @@ void OrreryTimepiece::add(const std::string& label, CelestialDayClock* clock) {
 		if (label == existingLabel) {
 			std::cerr << "Clock with label " << label << " already exists" << std::endl;
 			return;
-		}	
+		}
 	}
 
 	clocks.emplace_back(label, clock);
