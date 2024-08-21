@@ -26,7 +26,7 @@ CelestialDayClock& OrreryTimepiece::getClock(const std::string& searchLabel) {
 		if (searchLabel == label) return *clock;
 	}
 
-	std::cerr << "Clock with label " << searchLabel << " not found" << std::endl;
+	throw std::runtime_error("Clock with label " + searchLabel + " not found");
 }
 
 void OrreryTimepiece::clear() {
