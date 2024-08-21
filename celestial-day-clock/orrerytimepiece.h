@@ -17,6 +17,8 @@ public:
 
 	void add(const std::string& label, CelestialDayClock* clock);
 
+	CelestialDayClock& getClock(const std::string& searchLabel);
+
 	void clear();
 
 	std::vector<std::string> getTimesMilitary() const;

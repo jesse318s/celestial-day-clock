@@ -397,9 +397,13 @@ static void testOrreryTimepiece() {
 	timepiece->add("0. ", new CelestialDayClock(cdc_test::hours, 0));
 	timepiece->add("1. ", new CelestialDayClock(cdc_test::hours, cdc_test::minutes));
 	assert(timepiece->getTimesMilitary()[0] == "0. " + cdc_test::zeroTimeString);
+	assert(timepiece->getClock("0. ").getTimeMilitary() ==
+		cdc_test::zeroTimeString);
 	assert(timepiece->getTimesMilitary()[1] == "1. " + cdc_test::zeroTimeString);
 	timepiece->tick();
 	assert(timepiece->getTimesMilitary()[0] == "0. " + cdc_test::oneSecondTimeString);
+	assert(timepiece->getClock("0. ").getTimeMilitary() ==
+		cdc_test::oneSecondTimeString);
 	assert(timepiece->getTimesMilitary()[1] == "1. " + cdc_test::oneSecondTimeString);
 	delete timepiece;
 	std::cout << cdc_test::passed << std::endl;
@@ -417,9 +421,13 @@ static void testGalacticTimepiece() {
 	orreryTimepiece1->add("1. ", new CelestialDayClock(cdc_test::hours, cdc_test::minutes));
 	timepiece->add("0. ", orreryTimepiece0);
 	timepiece->add("1. ", orreryTimepiece1);
+	assert(timepiece->getTimepiece("0. ").getClock("0. ").getTimeMilitary() ==
+		cdc_test::zeroTimeString);
 	assert(timepiece->getTimesMilitary()[0] == "0. 0. " + cdc_test::zeroTimeString);
 	assert(timepiece->getTimesMilitary().back() == "1. 1. " + cdc_test::zeroTimeString);
 	timepiece->tick();
+	assert(timepiece->getTimepiece("0. ").getClock("0. ").getTimeMilitary() ==
+		cdc_test::oneSecondTimeString);
 	assert(timepiece->getTimesMilitary()[0] == "0. 0. " + cdc_test::oneSecondTimeString);
 	assert(timepiece->getTimesMilitary().back() == "1. 1. " + cdc_test::oneSecondTimeString);
 	delete timepiece;

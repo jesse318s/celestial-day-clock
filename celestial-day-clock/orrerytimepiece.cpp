@@ -8,6 +8,17 @@ void OrreryTimepiece::add(const std::string& label, CelestialDayClock* clock) {
 	clocks.emplace_back(label, clock);
 }
 
+CelestialDayClock& OrreryTimepiece::getClock(const std::string& searchLabel) {
+	for (const auto& [label, clock] : clocks) {
+		if (clock == nullptr)
+			throw std::runtime_error("Null clock pointer encountered in getClock");
+
+		if (searchLabel == label) return *clock;
+	}
+
+	throw std::runtime_error("Clock with label " + searchLabel + " not found");
+}
+
 void OrreryTimepiece::clear() {
 	deleteClocks();
 	clocks.clear();

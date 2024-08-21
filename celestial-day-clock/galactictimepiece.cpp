@@ -25,6 +25,19 @@ void GalacticTimepiece::add(const std::string& label, OrreryTimepiece* timepiece
 	timepieces.emplace_back(label, timepiece);
 }
 
+OrreryTimepiece& GalacticTimepiece::getTimepiece(const std::string& searchLabel) {
+	stopTicking();
+
+	for (const auto& [label, timepiece] : timepieces) {
+		if (timepiece == nullptr)
+			throw std::runtime_error("Null timepiece pointer encountered in getTimepiece");
+
+		if (searchLabel == label) return *timepiece;
+	}
+
+	throw std::runtime_error("Timepiece with label " + searchLabel + " not found");
+}
+
 void GalacticTimepiece::clear() {
 	stopTicking();
 	deleteTimepieces();

@@ -23,6 +23,8 @@ public:
 
 	void add(const std::string& label, OrreryTimepiece* timepiece);
 
+	OrreryTimepiece& getTimepiece(const std::string& searchLabel);
+
 	void clear();
 
 	std::vector<std::string> getTimesMilitary();
