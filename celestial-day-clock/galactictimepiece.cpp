@@ -45,7 +45,7 @@ OrreryTimepiece& GalacticTimepiece::getTimepiece(const std::string& searchLabel)
 		if (searchLabel == label) return *timepiece;
 	}
 
-	throw std::runtime_error("Timepiece with label " + searchLabel + " not found");
+	std::cerr << "Timepiece with label " << searchLabel << " not found" << std::endl;
 }
 
 void GalacticTimepiece::clear() {
