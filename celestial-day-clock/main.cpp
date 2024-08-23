@@ -399,7 +399,7 @@ static void testOrreryTimepiece() {
 	++cdcCount;
 	timepiece->add("1. ", new CelestialDayClock(cdc_test::hours, cdc_test::minutes));
 	++cdcCount;
-	assert(timepiece->getTimesMilitary().size() == cdcCount);
+	assert(timepiece->getSize() == cdcCount);
 	assert(timepiece->getTimesMilitary()[0] == "0. " + cdc_test::zeroTimeString);
 	assert(timepiece->getClock("0. ").getTimeMilitary() ==
 		cdc_test::zeroTimeString);
