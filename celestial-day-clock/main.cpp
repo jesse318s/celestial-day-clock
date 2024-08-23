@@ -392,10 +392,14 @@ static void testCDCStandardTime() {
 
 static void testOrreryTimepiece() {
 	OrreryTimepiece* timepiece = new OrreryTimepiece();
+	int cdcCount = 0;
 
 	std::cout << "\n\nTesting orrery timepiece..." << std::endl;
 	timepiece->add("0. ", new CelestialDayClock(cdc_test::hours, 0));
+	++cdcCount;
 	timepiece->add("1. ", new CelestialDayClock(cdc_test::hours, cdc_test::minutes));
+	++cdcCount;
+	assert(timepiece->getTimesMilitary().size() == cdcCount);
 	assert(timepiece->getTimesMilitary()[0] == "0. " + cdc_test::zeroTimeString);
 	assert(timepiece->getClock("0. ").getTimeMilitary() ==
 		cdc_test::zeroTimeString);
@@ -413,14 +417,20 @@ static void testGalacticTimepiece() {
 	GalacticTimepiece* timepiece = new GalacticTimepiece();
 	OrreryTimepiece* orreryTimepiece0 = new OrreryTimepiece();
 	OrreryTimepiece* orreryTimepiece1 = new OrreryTimepiece();
+	int cdcCount = 0;
 
 	std::cout << "\n\nTesting galactic timepiece..." << std::endl;
 	orreryTimepiece0->add("0. ", new CelestialDayClock(cdc_test::hours, 0));
+	++cdcCount;
 	orreryTimepiece0->add("1. ", new CelestialDayClock(cdc_test::hours, cdc_test::minutes));
+	++cdcCount;
 	orreryTimepiece1->add("0. ", new CelestialDayClock(cdc_test::hours, 0));
+	++cdcCount;
 	orreryTimepiece1->add("1. ", new CelestialDayClock(cdc_test::hours, cdc_test::minutes));
+	++cdcCount;
 	timepiece->add("0. ", orreryTimepiece0);
 	timepiece->add("1. ", orreryTimepiece1);
+	assert(timepiece->getSize() == cdcCount);
 	assert(timepiece->getTimepiece("0. ").getClock("0. ").getTimeMilitary() ==
 		cdc_test::zeroTimeString);
 	assert(timepiece->getTimesMilitary()[0] == "0. 0. " + cdc_test::zeroTimeString);
