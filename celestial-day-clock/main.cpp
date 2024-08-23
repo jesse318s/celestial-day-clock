@@ -440,6 +440,10 @@ static void testGalacticTimepiece() {
 		cdc_test::oneSecondTimeString);
 	assert(timepiece->getTimesMilitary()[0] == "0. 0. " + cdc_test::oneSecondTimeString);
 	assert(timepiece->getTimesMilitary().back() == "1. 1. " + cdc_test::oneSecondTimeString);
+	timepiece->startTicking();
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	assert(timepiece->getTimesMilitary()[0] != "0. 0. " + cdc_test::oneSecondTimeString);
+	assert(timepiece->getTimesMilitary().back() != "1. 1. " + cdc_test::oneSecondTimeString);
 	delete timepiece;
 	std::cout << cdc_test::passed << std::endl;
 }
