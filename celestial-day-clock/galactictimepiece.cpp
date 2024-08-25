@@ -130,14 +130,17 @@ void GalacticTimepiece::startTicking() {
 	running = true;
 
 	auto tickingTask = [this]() {
+		constexpr auto oneSecondInNanoseconds =
+			std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::seconds(1)).count();
 		auto nextTick = std::chrono::steady_clock::now() + std::chrono::seconds(1);
 		try {
 			while (running) {
 				const auto start = std::chrono::steady_clock::now();
 				tick();
 				const auto end = std::chrono::steady_clock::now();
-				const auto tickDuration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-				if (tickDuration > 1000) std::cerr << "Tick duration exceeded 1000 milliseconds" << std::endl;
+				const auto tickDuration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+				if (tickDuration > oneSecondInNanoseconds)
+					std::cerr << "Tick duration exceeded " << oneSecondInNanoseconds << " nanoseconds" << std::endl;
 				std::this_thread::sleep_until(nextTick);
 				nextTick += std::chrono::seconds(1);
 			}
