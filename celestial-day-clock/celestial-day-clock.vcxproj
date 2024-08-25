@@ -128,8 +128,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cdc_test.h" />
     <ClCompile Include="celestialdayclock.cpp" />
     <ClCompile Include="galactictimepiece.cpp" />
+    <ClCompile Include="globals.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="orrerytimepiece.cpp" />
   </ItemGroup>
@@ -137,6 +139,7 @@
     <ClInclude Include="celestialdayclock.h" />
     <ClInclude Include="celestialtimepiece.h" />
     <ClInclude Include="galactictimepiece.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="numeric_limits.h" />
     <ClInclude Include="orrerytimepiece.h" />
   </ItemGroup>

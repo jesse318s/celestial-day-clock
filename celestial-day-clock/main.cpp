@@ -1,3 +1,5 @@
+#include "cdc_test.h"
+#include "globals.h"
 #include "numeric_limits.h"
 #include "celestialdayclock.h"
 #include "orrerytimepiece.h"
@@ -13,86 +15,6 @@
 #include <unordered_map>
 #include <memory>
 #include <thread>
-
-namespace cdc_test {
-	struct ClockUnitValues {
-		int hours;
-		int minutesDigit1;
-		int minutesDigit2;
-		int secondsDigit1;
-		int secondsDigit2;
-	};
-
-	const std::string passed = "Test passed.";
-	const std::string nanString = "nan";
-	const std::string amIndicator = " AM";
-	const std::string pmIndicator = " PM";
-	const char delimiter = ':';
-	const std::string zeroTimeString = std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00";
-	const std::string oneSecondTimeString = std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01";
-	constexpr int senaryRadix = 6;
-	constexpr int senaryRadixMax = senaryRadix - 1;
-	constexpr int decimalRadix = 10;
-	constexpr int decimalRadixMax = decimalRadix - 1;
-	constexpr int hours = 4;
-	constexpr int minutes = 58;
-	constexpr int expectedMinutes = senaryRadixMax * decimalRadix + senaryRadix;
-	const ClockUnitValues time1 = { hours / 2 - 1,
-	 senaryRadixMax, decimalRadixMax,
-	 senaryRadixMax, decimalRadixMax };
-	const ClockUnitValues time2 = { hours - 1,
-	 senaryRadixMax, decimalRadixMax,
-	 senaryRadixMax, decimalRadixMax };
-	const ClockUnitValues time3 = { hours / 2,
-	 senaryRadixMax / 2, senaryRadix + 1,
-	 senaryRadixMax, decimalRadixMax };
-	const ClockUnitValues time4 = { hours,
-	 senaryRadixMax, decimalRadixMax,
-	 senaryRadixMax, decimalRadixMax };
-	const ClockUnitValues time5 = { hours + 1,
-	 senaryRadixMax / 2, senaryRadix + 1,
-	 senaryRadixMax, decimalRadixMax };
-}
-
-enum PlanetChoice {
-	Mercury = 1,
-	Venus,
-	Earth,
-	Mars,
-	Jupiter,
-	Saturn,
-	Uranus,
-	Neptune,
-	MaxChoice = Neptune
-};
-
-static const std::map<PlanetChoice, std::string> planetNames = {
-	{ Mercury, "Mercury" },
-	{ Venus, "Venus" },
-	{ Earth, "Earth"},
-	{ Mars, "Mars"},
-	{ Jupiter, "Jupiter" },
-	{ Saturn, "Saturn" },
-	{ Uranus, "Uranus" },
-	{ Neptune, "Neptune" }
-};
-
-struct CelestialDay { const int hours; const int minutes; };
-
-static const std::unordered_map<PlanetChoice, CelestialDay> planetDayLengths = {
-	{ PlanetChoice::Mercury, { 1407, 36 } },
-	{ PlanetChoice::Venus, { 5832, 36 } },
-	{ PlanetChoice::Earth, { 23, 56 } },
-	{ PlanetChoice::Mars, { 24, 37 } },
-	{ PlanetChoice::Jupiter, { 9, 55 } },
-	{ PlanetChoice::Saturn, { 10, 39 } },
-	{ PlanetChoice::Uranus, { 17, 14 } },
-	{ PlanetChoice::Neptune, { 16, 6 } }
-};
 
 static void testSimplifiedNumericLimits();
 
