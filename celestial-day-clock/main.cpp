@@ -41,14 +41,14 @@ static void displayCDCMenu();
 
 int main() {
 	std::srand(static_cast<unsigned int>(std::time(0)));
-	// Testing the new numeric_limits template and the dependent CelestialDayClock class
+	// Testing the new numeric_limits template and the dependent classes
 	testSimplifiedNumericLimits();
 	testNewNumericLimits();
 	testCDCMilitaryTime();
 	testCDCStandardTime();
 	testOrreryTimepiece();
 	testGalacticTimepiece();
-	// Demonstrating the use of the CelestialDayClock class
+	// Demonstrating the use of the new classes
 	displayCDCMenu();
 
 	return 0;
