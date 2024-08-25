@@ -39,7 +39,7 @@ public:
 	int getSecondsDigit2() const { return secondsDigit2; }
 
 	void setBodyMaximums(int h, int m);
-	std::string getBodyMaximums() const;
+	std::vector<int> getBodyMaximums() const;
 
 	std::string getTimeMilitary() const;
 

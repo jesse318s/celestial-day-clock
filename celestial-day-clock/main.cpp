@@ -152,10 +152,7 @@ static void setCDCTime(CelestialDayClock* clock, const cdc_test::ClockUnitValues
 
 static void testMilitaryTime1(CelestialDayClock* clock) {
 	std::cout << "\nTesting max hours for first half of day..." << std::endl;
-	assert(clock->getBodyMaximums() ==
-		std::to_string(cdc_test::hours) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00");
+	assert(clock->getBodyMaximums() == std::vector<int>({ cdc_test::hours, 0 }));
 	setCDCTime(clock, cdc_test::time1);
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time1.hours) + cdc_test::delimiter +
@@ -196,9 +193,7 @@ static void testMilitaryTime3(CelestialDayClock* clock) {
 	std::cout << "\nTesting max hours and max minutes for first half of day..." << std::endl;
 	clock->setBodyMaximums(cdc_test::hours, cdc_test::minutes);
 	assert(clock->getBodyMaximums() ==
-		std::to_string(cdc_test::hours) + cdc_test::delimiter +
-		std::to_string(cdc_test::expectedMinutes) + cdc_test::delimiter +
-		"00");
+		std::vector<int>({ cdc_test::hours, cdc_test::expectedMinutes }));
 	setCDCTime(clock, cdc_test::time3);
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time3.hours) + cdc_test::delimiter +
@@ -272,10 +267,7 @@ static void testCDCMilitaryTime() {
 
 static void testStandardTime1(CelestialDayClock* clock) {
 	std::cout << "\nTesting max hours for first half of day..." << std::endl;
-	assert(clock->getBodyMaximums() ==
-		std::to_string(cdc_test::hours) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00");
+	assert(clock->getBodyMaximums() == std::vector<int>({ cdc_test::hours, 0 }));
 	setCDCTime(clock, cdc_test::time1);
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time1.hours) + cdc_test::delimiter +
@@ -322,9 +314,7 @@ static void testStandardTime3(CelestialDayClock* clock) {
 	std::cout << "\nTesting max hours and max minutes for first half of day..." << std::endl;
 	clock->setBodyMaximums(cdc_test::hours, cdc_test::minutes);
 	assert(clock->getBodyMaximums() ==
-		std::to_string(cdc_test::hours) + cdc_test::delimiter +
-		std::to_string(cdc_test::expectedMinutes) + cdc_test::delimiter +
-		"00");
+		std::vector<int>({ cdc_test::hours, cdc_test::expectedMinutes }));
 	setCDCTime(clock, cdc_test::time3);
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time3.hours) + cdc_test::delimiter +
