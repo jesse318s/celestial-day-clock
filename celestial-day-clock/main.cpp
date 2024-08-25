@@ -38,7 +38,7 @@ namespace cdc_test {
 	constexpr int senaryRadixMax = senaryRadix - 1;
 	constexpr int decimalRadix = 10;
 	constexpr int decimalRadixMax = decimalRadix - 1;
-	constexpr int hours = 24;
+	constexpr int hours = 4;
 	constexpr int minutes = 58;
 	constexpr int expectedMinutes = senaryRadixMax * decimalRadix + senaryRadix;
 	const ClockUnitValues time1 = { hours / 2 - 1,
