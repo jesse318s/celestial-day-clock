@@ -104,7 +104,6 @@ bool CelestialDayClock::checkTimeReset() {
 		minutesDigit2 = 0;
 		secondsDigit1 = 0;
 		secondsDigit2 = 0;
-
 		isReset = true;
 	}
 
@@ -114,7 +113,6 @@ bool CelestialDayClock::checkTimeReset() {
 		minutesDigit2 = 0;
 		secondsDigit1 = 0;
 		secondsDigit2 = 0;
-
 		isReset = true;
 	}
 
