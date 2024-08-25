@@ -102,13 +102,13 @@ static void testMilitaryTime1(CelestialDayClock* clock) {
 	clock->tick();
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time1.hours + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00");
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::zeroTimeUnitString);
 	clock->tick();
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time1.hours + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01");
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::oneTimeUnitString);
 	std::cout << cdc_test::passed << std::endl;
 }
 
@@ -143,13 +143,13 @@ static void testMilitaryTime3(CelestialDayClock* clock) {
 	clock->tick();
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time3.hours + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00");
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::zeroTimeUnitString);
 	clock->tick();
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time3.hours + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01");
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::oneTimeUnitString);
 	std::cout << cdc_test::passed << std::endl;
 }
 
@@ -165,13 +165,13 @@ static void testMilitaryTime4(CelestialDayClock* clock) {
 	clock->tick();
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time4.hours + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00");
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::zeroTimeUnitString);
 	clock->tick();
 	assert(clock->getTimeMilitary() ==
 		std::to_string(cdc_test::time4.hours + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01");
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::oneTimeUnitString);
 	std::cout << cdc_test::passed << std::endl;
 }
 
@@ -217,13 +217,13 @@ static void testStandardTime1(CelestialDayClock* clock) {
 	clock->tick();
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time1.hours + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00" + cdc_test::pmIndicator);
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::zeroTimeUnitString + cdc_test::pmIndicator);
 	clock->tick();
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time1.hours + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01" + cdc_test::pmIndicator);
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::oneTimeUnitString + cdc_test::pmIndicator);
 	std::cout << cdc_test::passed << std::endl;
 }
 
@@ -239,13 +239,13 @@ static void testStandardTime2(CelestialDayClock* clock) {
 	clock->tick();
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time2.hours / 2 + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00" + cdc_test::amIndicator);
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::zeroTimeUnitString + cdc_test::amIndicator);
 	clock->tick();
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time2.hours / 2 + 1) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01" + cdc_test::amIndicator);
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::oneTimeUnitString + cdc_test::amIndicator);
 	std::cout << cdc_test::passed << std::endl;
 }
 
@@ -280,13 +280,13 @@ static void testStandardTime4(CelestialDayClock* clock) {
 	clock->tick();
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time4.hours / 2) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00" + cdc_test::pmIndicator);
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::zeroTimeUnitString + cdc_test::pmIndicator);
 	clock->tick();
 	assert(clock->getTime() ==
 		std::to_string(cdc_test::time4.hours / 2) + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01" + cdc_test::pmIndicator);
+		cdc_test::zeroTimeUnitString + cdc_test::delimiter +
+		cdc_test::oneTimeUnitString + cdc_test::pmIndicator);
 	std::cout << cdc_test::passed << std::endl;
 }
 

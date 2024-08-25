@@ -17,12 +17,14 @@ namespace cdc_test {
 	const std::string amIndicator = " AM";
 	const std::string pmIndicator = " PM";
 	const char delimiter = ':';
+	const std::string zeroTimeUnitString = "00";
+	const std::string oneTimeUnitString = "01";
 	const std::string zeroTimeString = std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"00";
+		zeroTimeUnitString + cdc_test::delimiter +
+		zeroTimeUnitString;
 	const std::string oneSecondTimeString = std::string(1, '0') + cdc_test::delimiter +
-		"00" + cdc_test::delimiter +
-		"01";
+		zeroTimeUnitString + cdc_test::delimiter +
+		oneTimeUnitString;
 	constexpr int senaryRadix = 6;
 	constexpr int senaryRadixMax = senaryRadix - 1;
 	constexpr int decimalRadix = 10;
