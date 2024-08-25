@@ -2,6 +2,7 @@
 #include "celestialdayclock.h"
 #include "orrerytimepiece.h"
 #include "galactictimepiece.h"
+#include <cstdlib>
 #include <iostream>
 #include <cassert>
 #include <string>
@@ -12,7 +13,6 @@
 #include <unordered_map>
 #include <memory>
 #include <thread>
-#include <cstdlib>
 
 namespace cdc_test {
 	struct ClockUnitValues {
