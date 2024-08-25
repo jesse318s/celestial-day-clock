@@ -17,22 +17,29 @@
 #include <thread>
 
 static void testSimplifiedNumericLimits();
+
 static void testNewNumericLimits();
+
 static void setCDCTime(CelestialDayClock* clock, const cdc_test::ClockUnitValues& time);
+
 static void testMilitaryTime1(CelestialDayClock* clock);
 static void testMilitaryTime2(CelestialDayClock* clock);
 static void testMilitaryTime3(CelestialDayClock* clock);
 static void testMilitaryTime4(CelestialDayClock* clock);
 static void testMilitaryTime5(CelestialDayClock* clock);
 static void testCDCMilitaryTime();
+
 static void testStandardTime1(CelestialDayClock* clock);
 static void testStandardTime2(CelestialDayClock* clock);
 static void testStandardTime3(CelestialDayClock* clock);
 static void testStandardTime4(CelestialDayClock* clock);
 static void testStandardTime5(CelestialDayClock* clock);
 static void testCDCStandardTime();
+
 static void testOrreryTimepiece();
+
 static void testGalacticTimepiece();
+
 static void displayCelestialTimepiece(CelestialTimepiece* timepiecePtr);
 static void displayPlanetaryCDCMenu();
 static OrreryTimepiece* createOrreryTimepiece();
