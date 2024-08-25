@@ -6,6 +6,7 @@
 #include <cassert>
 #include <string>
 #include <chrono>
+#include <vector>
 #include <utility>
 #include <map>
 #include <unordered_map>
