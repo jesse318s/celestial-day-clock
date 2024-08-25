@@ -1,4 +1,6 @@
 #include "orrerytimepiece.h"
+#include <stdexcept>
+#include <iostream>
 
 OrreryTimepiece::~OrreryTimepiece() { deleteClocks(); }
 

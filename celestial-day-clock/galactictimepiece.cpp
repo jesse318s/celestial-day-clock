@@ -1,4 +1,7 @@
 #include "galactictimepiece.h"
+#include <chrono>
+#include <iostream>
+#include <thread>
 
 GalacticTimepiece::~GalacticTimepiece() {
 	stopTicking();
