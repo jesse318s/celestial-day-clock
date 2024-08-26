@@ -408,10 +408,10 @@ static void displayPlanetaryCDCMenu() {
 	const std::string range =
 		std::to_string(PlanetChoice::Mercury) + " and " + std::to_string(PlanetChoice::MaxChoice);
 	int choice = 0;
-	bool validChoice = false;
+	bool isValidChoice = false;
 
-	while (!validChoice) {
-		validChoice = true;
+	while (!isValidChoice) {
+		isValidChoice = true;
 		std::cout << "\n\nChoose a planet to display its standard clock: " << std::endl;
 
 		for (const auto& [planetChoice, planetName] : planetNames) {
@@ -422,7 +422,7 @@ static void displayPlanetaryCDCMenu() {
 
 		if (std::cin.fail() ||
 			choice < PlanetChoice::Mercury || choice > PlanetChoice::MaxChoice) {
-			validChoice = false;
+			isValidChoice = false;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "Invalid planet choice number. Please enter a choice number between "
@@ -472,10 +472,10 @@ static void displayCDCMenu() {
 	const std::string range =
 		std::to_string(planetChoice) + " and " + std::to_string(galacticChoice);
 	int choice = 0;
-	bool validChoice = false;
+	bool isValidChoice = false;
 
-	while (!validChoice) {
-		validChoice = true;
+	while (!isValidChoice) {
+		isValidChoice = true;
 		std::cout << "\n\nChoose to display a planet clock or an orrery timepiece: " << std::endl;
 		std::cout << std::to_string(planetChoice) + ". Display a planet clock" << std::endl;
 		std::cout << std::to_string(orreryChoice) + ". Display an orrery timepiece" << std::endl;
@@ -483,7 +483,7 @@ static void displayCDCMenu() {
 		std::cin >> choice;
 
 		if (std::cin.fail() || choice < planetChoice || choice > galacticChoice) {
-			validChoice = false;
+			isValidChoice = false;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "Invalid menu choice number. Please enter a choice number between " +
