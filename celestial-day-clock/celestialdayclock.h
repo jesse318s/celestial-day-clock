@@ -21,7 +21,7 @@ public:
 	static constexpr int secondaryRadix = numeric_limits<std::time_t>::radices[1];
 	static constexpr int secondaryRadixMax = secondaryRadix - 1;
 
-	CelestialDayClock(int h, int m) { setBodyMaximums(h, m); }
+	CelestialDayClock(int h, int m);
 
 	void setHours(int h);
 	int getHours() const { return hours; }

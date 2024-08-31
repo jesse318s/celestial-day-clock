@@ -1,5 +1,7 @@
 #include "celestialdayclock.h"
 
+CelestialDayClock::CelestialDayClock(int h, int m) { setBodyMaximums(h, m); }
+
 void CelestialDayClock::setHours(int h) { hours = clamp(h, maxHours); }
 
 void CelestialDayClock::setMinutesDigit1(int m) { minutesDigit1 = clamp(m, radixMax); }
