@@ -20,6 +20,25 @@ done is by first, starting at zero, appending X/2 minutes to the AM and PM clock
 every X minutes of the body’s full rotation. However, in order for the clock to be symmetrical, 
 the number of minutes that belong to the AM and PM sections must be even.
 
+### The Derivative of a Clock
+
+&nbsp; &nbsp; &nbsp; &nbsp; While the above explains the discrete, digit-by-digit (digital) structure of time, there is 
+also a continuous, rotational (analog) perspective worth considering. This can be expressed as the 
+derivative of time with respect to radix, written as dt/dr (notated here as ṙ). <br/>
+&nbsp; &nbsp; &nbsp; &nbsp; Here, **t** represents time — specifically, the "primary tick" in the clock's numeral system. 
+Its duration is made up of a number of precise, atomic durations. For example, t could be the 
+length of a planet's full rotation (i.e., one day), or more generally, the maximum time interval 
+represented by the clock. As a continuous interval, t corresponds to the full sweep of a clock 
+hand around a dial, and varies as r changes. <br/>
+&nbsp; &nbsp; &nbsp; &nbsp; **r** represents the radix — that is, the (potentially non-integer) base used for the clock's 
+primary tick. For instance, r could be 24 for a standard Earth day clock, or a value such as 
+24.62 for a clock representing a different celestial body's rotation. As an analog quantity, r 
+captures how the continuous rotation is partitioned into divisions, much like the tick marks on 
+an analog clock face. <br/>
+&nbsp; &nbsp; &nbsp; &nbsp; The derivative dt/dr therefore describes how the duration of a primary tick changes as the 
+number of those divisions varies — bridging the analog sweep of a clock hand with the digital 
+partitioning of time into a radix-based numeral system.
+
 # Usage
 
 ## CelestialDayClock Class
